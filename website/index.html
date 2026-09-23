@@ -861,7 +861,7 @@ function drawPage() {
   const doc = document.documentElement;
   const sp = Math.round(clamp(scrollY / (doc.scrollHeight - innerHeight), 0, 1) * 1000) / 1000;
   if (sp !== lastSp) { seam.style.setProperty('--sp', sp); lastSp = sp; }
-  const isSolid = scrollY > innerHeight * 0.4;
+  const isSolid = hero.getBoundingClientRect().bottom < innerHeight - 4;
   if (isSolid !== solid) { nav.classList.toggle('solid', isSolid); solid = isSolid; }
   if (pinned) return;
   const r = stepsWrap.getBoundingClientRect();
