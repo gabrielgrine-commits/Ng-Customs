@@ -152,9 +152,9 @@ h3{font-size:26px}
 .cue.hide{opacity:0}
 @media (max-height:560px){.cue,.ring{display:none}}
 
-/* Static hero: the five gates, identical in JS */
+/* Static hero: the gates, identical in JS. Phones get the scrub too (video is 1.5 MB, the action lane is centered and survives the portrait crop). */
 .static-only{display:none}
-@media (max-width: 720px), (orientation: portrait) and (max-width: 1024px), (orientation: portrait) and (pointer: coarse), (orientation: landscape) and (pointer: coarse) and (max-height: 560px), (prefers-reduced-motion: reduce){
+@media (orientation: landscape) and (pointer: coarse) and (max-height: 560px), (prefers-reduced-motion: reduce){
   .static-only{display:inline}.scrub-only{display:none}
   .hero{height:auto}
   .stage{position:relative;height:auto;min-height:100svh;display:flex;align-items:flex-start;background:var(--wall) url(assets/hero-ending.jpg) center 70%/cover no-repeat}
@@ -162,7 +162,22 @@ h3{font-size:26px}
   .band-4{position:relative;left:auto;top:auto;transform:none;opacity:1;--k:1;margin:clamp(110px,18vh,170px) auto 0;padding-bottom:42vh}
   .band-4 .w,.band-4 p,.band-4 .row{opacity:1;transform:none}
 }
-@media (max-width:720px){.band-4 .h{font-size:clamp(40px,11vw,56px)}.band-4{padding-bottom:46svh}}
+@media (max-width:720px) and (prefers-reduced-motion: reduce){.band-4 .h{font-size:clamp(40px,11vw,56px)}.band-4{padding-bottom:46svh}.band-4 .h br{display:none}}
+.band .h{text-wrap:balance}
+@media (max-width:720px) and (orientation: portrait) and (prefers-reduced-motion: no-preference){
+  .stage{height:100svh}
+  .band,.band-2,.band-4{left:20px;right:20px;width:auto;transform:none;text-align:center}
+  .band-1,.band-2,.band-3{top:15svh}
+  .band-4{top:13svh}
+  .band p,.band-2 p{margin-inline:auto;max-width:32ch}
+  .band h1,.band .h{font-size:clamp(36px,10.4vw,50px)}
+  .band p.sub-punch{font-size:clamp(21px,5.8vw,27px)}
+  .band-4 .h br{display:none}
+  .band-4 .row{flex-direction:column;align-items:stretch;max-width:340px;margin-inline:auto}
+  .band::before{inset:-12% -6%}
+  .cue{display:none}
+  .ring{right:20px;bottom:20px}
+}
 
 /* ============ SECTIONS ============ */
 main section{position:relative;scroll-margin-top:74px}
@@ -232,6 +247,7 @@ main section{position:relative;scroll-margin-top:74px}
 /* KI add-on: its own stage under the packages */
 .kiplus{position:relative;overflow:hidden;margin-top:22px;display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;padding:52px 52px;border-radius:var(--radius);background:linear-gradient(135deg,#FBFAF7 0%,#EEF1FB 100%);box-shadow:inset 0 0 0 2px var(--accent),0 44px 80px -50px rgba(47,91,234,.6)}
 .kiplus::before{content:"";position:absolute;width:520px;height:520px;right:-160px;top:-220px;border-radius:50%;background:radial-gradient(circle,rgba(47,91,234,.16),rgba(47,91,234,0) 65%);pointer-events:none}
+.kp-main{min-width:0}
 .kp-kick{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary)}
 .kp-kick .pill{background:var(--accent);color:#fff;padding:6px 12px;border-radius:999px;letter-spacing:.14em}
 .kiplus h3{font-size:clamp(30px,3.2vw,46px);margin:18px 0 14px;max-width:20ch}
@@ -252,8 +268,9 @@ main section{position:relative;scroll-margin-top:74px}
 .kp-tier p:last-child{font-size:15px;color:var(--text-secondary)}
 .kp-note{font-size:14px;color:var(--text-secondary);text-align:center}
 .tax{margin-top:18px;font-size:13.5px;color:var(--text-secondary);text-align:center}
-@media (max-width:1024px){.kiplus{grid-template-columns:1fr;gap:32px}}
-@media (max-width:720px){.kiplus{padding:32px 22px}.kp-kick{flex-wrap:wrap}.kp-cta .btn{width:100%}}
+@media (max-width:1024px){.kiplus{grid-template-columns:minmax(0,1fr);gap:32px}}
+@media (max-width:720px){.addon{flex-direction:column;text-align:center;justify-content:center}.kiplus{padding:32px 22px}.kp-main{min-width:0}
+.kp-kick{flex-wrap:wrap}.kp-cta .btn{width:100%}}
 
 /* Reception (navy band) */
 .rez{background:var(--navy);color:var(--on-navy);overflow:hidden}
@@ -381,11 +398,11 @@ footer .fine{grid-column:1/-1;display:flex;justify-content:space-between;gap:20p
 
 /* Responsive */
 @media (max-width:1024px){
-  .doors-head,.rez-grid,.wort-grid,.faq-grid,.kontakt-grid{grid-template-columns:1fr;gap:40px}
+  .doors-head,.rez-grid,.wort-grid,.faq-grid,.kontakt-grid{grid-template-columns:minmax(0,1fr);gap:40px}
   .faq-grid .intro{position:static}
-  .doors{grid-template-columns:1fr}
+  .doors{grid-template-columns:minmax(0,1fr)}
   .plans{grid-template-columns:1fr 1fr}
-  .lux{grid-template-columns:1fr}
+  .lux{grid-template-columns:minmax(0,1fr)}
   .lux figure{height:260px;order:-1}
   .lux figure::after{background:linear-gradient(0deg,var(--navy-deep),rgba(14,23,56,0) 60%)}
   .steps{grid-template-columns:1fr 1fr;row-gap:48px}
@@ -402,16 +419,16 @@ footer .fine{grid-column:1/-1;display:flex;justify-content:space-between;gap:20p
 @media (max-width:720px){
   body{font-size:16.5px}
   .wrap{width:min(1180px,100% - 32px)}
-  .plans{grid-template-columns:1fr}
-  .door{grid-template-columns:1fr}
+  .plans{grid-template-columns:minmax(0,1fr)}
+  .door{grid-template-columns:minmax(0,1fr)}
   .door figure{height:220px}
   .lux .txt{padding:32px 24px}
-  .lux .ticks{grid-template-columns:1fr}
-  .feats,.tarife,.two{grid-template-columns:1fr}
-  .steps{grid-template-columns:1fr}
-  .promise{grid-template-columns:1fr;gap:10px}
+  .lux .ticks{grid-template-columns:minmax(0,1fr)}
+  .feats,.tarife,.two{grid-template-columns:minmax(0,1fr)}
+  .steps{grid-template-columns:minmax(0,1fr)}
+  .promise{grid-template-columns:minmax(0,1fr);gap:10px}
   form.card{padding:24px}
-  footer .wrap{grid-template-columns:1fr}
+  footer .wrap{grid-template-columns:minmax(0,1fr)}
   footer nav{justify-content:flex-start}
   .logo .word{font-size:22px}
 }
@@ -753,14 +770,11 @@ $$('.split').forEach(el => {
     const i = wi++;
     if (wordsOnly) return `<span class="w" style="--th:${(i / totalWords * .5 + r() * .04).toFixed(3)}">${word}</span>`;
     return `<span class="w">${[...word].map(ch => `<span class="c" style="--th:${(i / totalWords * .42 + r() * .12).toFixed(3)}">${ch}</span>`).join('')}</span>`;
-  }).join(' ')).join('<br>');
+  }).join(' ')).join(' <br>');
 });
 
 /* ---------- Hero scrub ---------- */
 const GATES = [
-  '(max-width: 720px)',
-  '(orientation: portrait) and (max-width: 1024px)',
-  '(orientation: portrait) and (pointer: coarse)',
   '(orientation: landscape) and (pointer: coarse) and (max-height: 560px)',
   '(prefers-reduced-motion: reduce)'
 ];
@@ -853,13 +867,20 @@ async function loadHeroBlob() {
   clearTimeout(watchdog);
   ring.style.setProperty('--ld', 0);
   video.src = URL.createObjectURL(new Blob(chunks, { type: 'video/mp4' }));
-  video.load();
-  video.addEventListener('canplay', () => {
+  video.preload = 'auto';
+  let readyDone = false;
+  const onReady = () => {
+    if (readyDone || !video.duration) return; readyDone = true;
     videoOK = true;
     stage.classList.add('video-ready');
     ring.classList.add('done');
     requestSeek(heroProgress() * (video.duration - 0.05));
-  }, { once: true });
+  };
+  video.addEventListener('loadeddata', onReady, { once: true });
+  video.addEventListener('canplay', onReady, { once: true });
+  video.load();
+  // iOS paints seeked frames only after the video has played once: prime it silently
+  video.addEventListener('loadedmetadata', () => { const p = video.play(); if (p) p.then(() => { video.pause(); onReady(); }).catch(() => {}); }, { once: true });
 }
 function failVideo() {
   if (failed) return; failed = true;
