@@ -11,7 +11,7 @@ Gebaut nach der Anleitung „10K Websites“ (`10k-websites-skill.zip`).
 - Film und Bilder wurden mit KI erstellt (Higgsfield), das steht auch im Footer.
 
 ## Vor dem Livegang
-- Echte E-Mail-Adresse und Telefonnummer (in `index.html`: Kontaktbereich und `mailto:` im Skript)
+- Echte Telefonnummer (E-Mail ng-customs@hotmail.com ist eingetragen)
 - Preise prüfen (Pakete und KI-Rezeptionistin)
 - `impressum.html` und `datenschutz.html` mit echten Angaben füllen
 - `og:image` und `og:url` beim Deploy auf die Live-Adresse setzen (Kommentar `DEPLOY STEP`)

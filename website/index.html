@@ -229,6 +229,32 @@ main section{position:relative;scroll-margin-top:74px}
 .addon p{font-weight:500}
 .addon p span{color:var(--text-secondary);font-weight:400}
 
+/* KI add-on: its own stage under the packages */
+.kiplus{position:relative;overflow:hidden;margin-top:22px;display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;padding:52px 52px;border-radius:var(--radius);background:linear-gradient(135deg,#FBFAF7 0%,#EEF1FB 100%);box-shadow:inset 0 0 0 2px var(--accent),0 44px 80px -50px rgba(47,91,234,.6)}
+.kiplus::before{content:"";position:absolute;width:520px;height:520px;right:-160px;top:-220px;border-radius:50%;background:radial-gradient(circle,rgba(47,91,234,.16),rgba(47,91,234,0) 65%);pointer-events:none}
+.kp-kick{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary)}
+.kp-kick .pill{background:var(--accent);color:#fff;padding:6px 12px;border-radius:999px;letter-spacing:.14em}
+.kiplus h3{font-size:clamp(30px,3.2vw,46px);margin:18px 0 14px;max-width:20ch}
+.nw{white-space:nowrap}
+.kp-lede{color:var(--text-secondary);font-size:18px;max-width:46ch}
+.wave{display:flex;align-items:center;gap:5px;height:44px;margin:26px 0 28px;overflow:hidden;max-width:100%}
+.wave i{flex:none}
+.wave i{display:block;width:5px;height:100%;border-radius:3px;background:var(--accent);transform:scaleY(var(--s,.3));opacity:.85}
+.live .wave i{animation:wave 1.5s var(--ease-io) infinite alternate}
+@keyframes wave{from{transform:scaleY(var(--s,.3))}to{transform:scaleY(var(--e,.8))}}
+.kp-cta{display:flex;gap:12px;flex-wrap:wrap}
+.kp-tiers{position:relative;display:grid;gap:14px}
+.kp-tier{position:relative;background:var(--panel);border-radius:12px;padding:22px 24px;box-shadow:inset 0 0 0 1px var(--line),0 18px 30px -24px rgba(21,29,59,.35)}
+.kp-tier.hl{box-shadow:inset 0 0 0 2px var(--accent),0 24px 40px -26px rgba(47,91,234,.55)}
+.kp-tier .tag{position:absolute;top:18px;right:18px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:var(--accent-muted);padding:5px 10px;border-radius:999px}
+.kp-tier h4{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-secondary);font-weight:500}
+.kp-tier .price{font-size:40px;margin:10px 0 8px}
+.kp-tier p:last-child{font-size:15px;color:var(--text-secondary)}
+.kp-note{font-size:14px;color:var(--text-secondary);text-align:center}
+.tax{margin-top:18px;font-size:13.5px;color:var(--text-secondary);text-align:center}
+@media (max-width:1024px){.kiplus{grid-template-columns:1fr;gap:32px}}
+@media (max-width:720px){.kiplus{padding:32px 22px}.kp-kick{flex-wrap:wrap}.kp-cta .btn{width:100%}}
+
 /* Reception (navy band) */
 .rez{background:var(--navy);color:var(--on-navy);overflow:hidden}
 .rez h2{color:var(--on-navy)}
@@ -539,8 +565,22 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
       </div>
       <figure aria-hidden="true"><img src="assets/hero-ending.jpg" alt="" width="1376" height="768" loading="lazy"></figure>
     </article>
-    <div class="addon rv"><p class="it">Zusatz: KI-Rezeptionistin zu jedem Paket. <span>Ab 199 € im Monat, Einrichtung einmalig 490 €.</span></p><a href="#rezeption" class="btn ghost small it">So funktioniert sie</a></div>
-    <div class="addon rv"><p class="it">Sorglos-Paket für Ihre Webseite. <span>Hosting, Updates und kleine Änderungen für 39 € im Monat.</span></p><a href="#kontakt" class="btn ghost small it">Anfragen</a></div>
+    <article class="kiplus rv" id="ki-zusatz">
+      <div class="kp-main">
+        <p class="kp-kick it"><span class="pill">Zusatzpaket</span>zu jedem Paket buchbar</p>
+        <h3 class="it">Ihre <span class="nw">KI-Rezeptionistin.</span> Sie geht ran, wenn Sie es nicht können.</h3>
+        <p class="kp-lede it">Sie nimmt jeden Anruf an, rund um die Uhr, und trägt Termine direkt in Ihren Kalender ein. Zu jeder Webseite dazu, oder ganz ohne neue Webseite.</p>
+        <div class="wave it" aria-hidden="true"></div>
+        <div class="kp-cta it"><a href="#kontakt" class="btn" data-paket="Webseite und KI-Rezeptionistin">KI-Rezeptionistin dazubuchen <span class="arr" aria-hidden="true">→</span></a><a href="#rezeption" class="btn ghost">Beispielanruf ansehen</a></div>
+      </div>
+      <div class="kp-tiers it">
+        <div class="kp-tier"><h4>Starter</h4><p class="price">199 €<small>/ Monat</small></p><p>Bis 150 Anrufe im Monat, 1 Kalender</p></div>
+        <div class="kp-tier hl"><span class="tag">Empfohlen</span><h4>Pro</h4><p class="price">349 €<small>/ Monat</small></p><p>Bis 500 Anrufe, mehrere Kalender, SMS-Bestätigung</p></div>
+        <p class="kp-note">Einrichtung einmalig 490 €. Monatlich kündbar. Ihre Nummer bleibt Ihre Nummer.</p>
+      </div>
+    </article>
+    <div class="addon rv"><p class="it">Sorglos-Paket für Ihre Webseite. <span>Hosting, Updates und kleine Änderungen für 39 € im Monat.</span></p><a href="#kontakt" class="btn ghost small it" data-paket="Sorglos-Paket">Anfragen</a></div>
+    <p class="tax">Alle Preise sind Endpreise. Umsatzsteuerbefreit, Kleinunternehmer gem. § 6 Abs. 1 Z 27 UStG.</p>
   </div>
 </section>
 
@@ -640,7 +680,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
       <h2 class="it">Erzählen Sie uns von Ihrem Betrieb.</h2>
       <p class="lede it">30 Minuten bei Ihnen vor Ort oder per Videocall, kostenlos und unverbindlich. Wir melden uns innerhalb von 24 Stunden.</p>
       <div class="contact-lines it">
-        <a href="mailto:info@ng-customs.de"><span class="mono">E-Mail</span>info@ng-customs.de</a>
+        <a href="mailto:ng-customs@hotmail.com"><span class="mono">E-Mail</span>ng-customs@hotmail.com</a>
         <a href="tel:+430000000000"><span class="mono">Telefon</span>+43 000 000 0000</a>
       </div>
     </div>
@@ -890,6 +930,13 @@ for (let i = 0; i < 18; i++) {
   motes.appendChild(m);
 }
 
+const wave = $('.wave'), wr = rng(9);
+if (wave) for (let i = 0; i < 34; i++) {
+  const bar = document.createElement('i'), base = .18 + .5 * Math.abs(Math.sin(i * .45)) * wr();
+  bar.style.cssText = `--s:${base.toFixed(2)};--e:${Math.min(1, base + .25 + wr() * .45).toFixed(2)};animation-delay:${(-wr() * 1.5).toFixed(2)}s`;
+  wave.appendChild(bar);
+}
+
 /* ---------- The interactive moment: hold to answer ---------- */
 const phone = $('#phone'), hold = $('.hold'), chat = $('.chat', phone), booked = $('.booked', phone);
 const convo = [
@@ -972,7 +1019,7 @@ form.addEventListener('submit', e => {
   const f = new FormData(form);
   const subject = `Erstgespräch: ${f.get('paket')}`;
   const body = `Name: ${f.get('name')}\nBetrieb: ${f.get('firma') || '-'}\nE-Mail: ${f.get('email')}\nTelefon: ${f.get('tel') || '-'}\nInteresse: ${f.get('paket')}\n\n${f.get('msg') || ''}`;
-  location.href = `mailto:info@ng-customs.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  location.href = `mailto:ng-customs@hotmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   form.classList.add('sent');
 });
 
