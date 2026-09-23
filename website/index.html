@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NG Customs · Webseiten und KI-Rezeptionistinnen für KMU</title>
+<meta name="description" content="NG Customs baut Webseiten und KI-Rezeptionistinnen für kleine und mittlere Unternehmen. Festpreise, deutschlandweit, komplett online.">
+<meta name="theme-color" content="#F4F2EE">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%23202A4B'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-weight='700' font-size='26' fill='%23F9FAF5' text-anchor='middle'%3ENG%3C/text%3E%3C/svg%3E">
+<meta property="og:title" content="NG Customs · Jeder Kunde kommt an.">
+<meta property="og:description" content="Webseiten und KI-Rezeptionistinnen für kleine und mittlere Unternehmen. Deutschlandweit, komplett online.">
+<meta property="og:type" content="website">
+<!-- DEPLOY STEP: og:image und og:url mit der Live-Adresse (absolut) patchen -->
+<meta property="og:image" content="assets/hero-ending.jpg">
+<meta property="og:url" content="/">
+<link rel="preload" href="assets/fonts/zilla-slab-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Zilla Slab";src:url(assets/fonts/zilla-slab-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Zilla Slab";src:url(assets/fonts/zilla-slab-700.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Instrument Sans";src:url(assets/fonts/instrument-sans.woff2) format("woff2");font-weight:400 600;font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url(assets/fonts/jetbrains-mono-500.woff2) format("woff2");font-weight:500;font-display:swap}
+
+:root{
+  --canvas:#F4F2EE;
+  --panel:#FBFAF7;
+  --wall:#E9E4DE;
+  --ink:#151D3B;
+  --navy:#1A2550;
+  --navy-deep:#0E1738;
+  --text-secondary:#4A5270;
+  --line:#DDD8D0;
+  --line-strong:#7C8299;
+  --accent:#2F5BEA;
+  --accent-hover:#2349C9;
+  --accent-muted:rgba(47,91,234,.16);
+  --on-navy:#F4F2EE;
+  --on-navy-2:#B9BFD6;
+  --display:"Zilla Slab",Georgia,serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --ease-io:cubic-bezier(.65,0,.35,1);
+  --radius:14px;
+  --halo:0 1px 2px rgba(244,242,238,.95),0 3px 14px rgba(244,242,238,.85),0 10px 44px rgba(244,242,238,.8);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:hidden;overflow-x:clip;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{overflow-x:hidden;overflow-x:clip;background:var(--canvas);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;animation:pagein .9s var(--ease-out) both}
+@keyframes pagein{from{opacity:0}to{opacity:1}}
+img,video,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.skip{position:fixed;left:16px;top:-60px;z-index:100;background:var(--navy);color:var(--on-navy);padding:10px 16px;border-radius:8px;transition:top .3s var(--ease-out)}
+.skip:focus{top:12px}
+.wrap{width:min(1180px,100% - 48px);margin-inline:auto}
+
+/* One environment: fixed background layer behind everything */
+.env{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.env::before{content:"";position:absolute;inset:0;background-image:linear-gradient(to right,rgba(26,37,80,.045) 1px,transparent 1px);background-size:88px 100%}
+.env::after{content:"";position:absolute;width:70vmax;height:70vmax;left:-20vmax;top:-25vmax;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.75),rgba(255,255,255,0) 62%);animation:drift 80s var(--ease-io) -20s infinite alternate}
+@keyframes drift{to{transform:translate(60vw,70vh)}}
+
+/* The light seam: signature element, echoes the blue light line in the film */
+.seam{position:fixed;left:max(12px,calc((100vw - 1180px)/2 - 36px));top:0;bottom:0;width:2px;z-index:5;pointer-events:none;background:rgba(26,37,80,.07)}
+.seam i{position:absolute;left:0;top:0;width:2px;height:100%;transform-origin:top;transform:scaleY(var(--sp,0));background:linear-gradient(var(--accent),rgba(47,91,234,.35));box-shadow:0 0 12px rgba(47,91,234,.55)}
+.seam b{position:absolute;left:-3px;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-muted),0 0 18px rgba(47,91,234,.7);top:calc(var(--sp,0)*100% - 4px)}
+@media (max-width:1100px){.seam{display:none}}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:40;transition:background .5s var(--ease-out),box-shadow .5s var(--ease-out)}
+.nav.solid nav a:not(.btn){text-shadow:none;color:var(--text-secondary)}
+.nav.solid{background:rgba(244,242,238,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
+.logo{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:700;letter-spacing:.02em}
+.logo .mark{display:grid;place-items:center;width:40px;height:40px;background:#202A4B;color:#F9FAF5;font-size:17px;letter-spacing:.04em}
+.logo .word{font-size:21px;color:var(--ink)}
+.nav nav{display:flex;align-items:center;gap:28px;font-size:15px}
+.nav nav a:not(.btn){color:var(--navy);text-shadow:var(--halo);position:relative;transition:color .3s var(--ease-out)}
+.nav nav a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease-out)}
+.nav nav a:not(.btn):hover{color:var(--ink)}
+.nav nav a:not(.btn):hover::after{transform:scaleX(1)}
+.menu{display:none;width:44px;height:44px;place-items:center}
+.menu span{display:block;width:22px;height:2px;background:var(--ink);box-shadow:0 7px 0 var(--ink),0 -7px 0 var(--ink);transition:transform .3s var(--ease-out)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 24px;border-radius:999px;font-weight:600;font-size:16px;line-height:1.2;background:var(--accent);color:#fff;text-shadow:none;transition:background .35s var(--ease-out),transform .35s var(--ease-out),box-shadow .35s var(--ease-out)}
+.btn:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 12px 28px -10px rgba(47,91,234,.55)}
+.btn .arr{transition:transform .35s var(--ease-out)}
+.btn:hover .arr{transform:translateX(4px)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line-strong)}
+.btn.ghost:hover{background:rgba(26,37,80,.06);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.small{padding:10px 18px;font-size:15px}
+.btn.onnavy.ghost{color:var(--on-navy);box-shadow:inset 0 0 0 1.5px rgba(244,242,238,.5)}
+.btn.onnavy.ghost:hover{background:rgba(244,242,238,.08);box-shadow:inset 0 0 0 1.5px var(--on-navy)}
+@media (pointer:coarse){.btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center}}
+
+.kicker{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-secondary);display:flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:22px;height:1px;background:currentColor}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.08;letter-spacing:-.01em;color:var(--ink)}
+h2{font-size:clamp(34px,4.6vw,58px);margin:18px 0 20px;max-width:18ch}
+h3{font-size:26px}
+.lede{font-size:19px;color:var(--text-secondary);max-width:54ch}
+
+/* ============ HERO ============ */
+.hero{position:relative;height:580vh}
+.stage{position:sticky;top:0;height:100vh;height:100lvh;overflow:hidden;background:var(--wall)}
+.stage .poster,.stage .poster-end{position:absolute;inset:0;background-size:cover;background-position:center}
+.stage .poster-end{opacity:0}
+.stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s var(--ease-out);will-change:transform;transform:translateZ(0)}
+.stage.video-ready video{opacity:1}
+.stage.video-failed video{display:none}
+.scrim{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 120% 90% at 50% 45%,rgba(244,242,238,0) 40%,rgba(244,242,238,.45) 100%)}
+.band{position:absolute;opacity:0;text-shadow:var(--halo);will-change:opacity}
+.band::before{content:"";position:absolute;inset:-28% -18%;z-index:-1;pointer-events:none;opacity:calc(.25 + .75*var(--k,1));background:radial-gradient(ellipse 60% 58% at 50% 50%,rgba(244,242,238,var(--sa,.66)) 0%,rgba(244,242,238,calc(var(--sa,.66)*.62)) 46%,rgba(244,242,238,0) 76%)}
+.band .btn{text-shadow:none}
+.band h1,.band .h{font-size:clamp(40px,5.6vw,84px);font-family:var(--display);font-weight:700;line-height:1.02;letter-spacing:-.015em;color:var(--ink)}
+.band p{font-size:clamp(18px,1.5vw,22px);color:var(--navy);margin-top:16px;font-weight:500;max-width:30ch}
+.band-1{left:max(24px,6vw);top:24vh;--sa:.62}
+.band-2{right:max(24px,6vw);top:36vh;text-align:right;--sa:.66}
+.band-2 p{margin-left:auto}
+.band-3{left:max(24px,6vw);top:34vh;--sa:.66}
+.band-4{left:50%;top:15vh;width:min(920px,92vw);transform:translateX(-50%);text-align:center;--sa:.72}
+.band-4 p{margin-inline:auto;max-width:44ch}
+.band-4 .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.w{display:inline-block;white-space:nowrap}
+.c{display:inline-block}
+/* (f) drift-down: band 1 echoes the descent */
+.band-1 .c{--kc:clamp(0,(var(--k,0) - var(--th,0))*2.8,1);opacity:var(--kc);transform:translateY(calc((1 - var(--kc))*-26px))}
+/* (c) blur-to-sharp: band 2, the quiet beat as the light shifts */
+.band-2 .stack{display:grid}
+.band-2 .stack>*{grid-area:1/1}
+.band-2 .soft{filter:blur(10px);opacity:calc(1 - var(--k,0))}
+.band-2 .sharp{opacity:var(--k,0)}
+/* (g) approach-from-depth: band 3 grows as the camera pushes forward */
+.band-3 .w{--kc:clamp(0,(var(--k,0) - var(--th,0))*2.6,1);opacity:var(--kc);transform:scale(calc(.82 + .18*var(--kc)));transform-origin:50% 70%}
+/* (e) word rise into a staged settle: band 4 arrives with the film */
+.band-4 .w{--kc:clamp(0,(var(--k,0) - var(--th,0))*3,1);opacity:var(--kc);transform:translateY(calc((1 - var(--kc))*34px))}
+.band-4 p{opacity:clamp(0,(var(--k,0) - .62)*4,1);transform:translateY(calc((1 - clamp(0,(var(--k,0) - .62)*4,1))*14px))}
+.band-4 .row{opacity:clamp(0,(var(--k,0) - .78)*5,1);transform:translateY(calc((1 - clamp(0,(var(--k,0) - .78)*5,1))*14px))}
+.band .sub-soft{opacity:var(--k,0)}
+.ring{position:absolute;right:28px;bottom:28px;width:44px;height:44px;color:var(--navy);transition:opacity .6s var(--ease-out)}
+.ring circle.track{stroke:rgba(26,37,80,.15)}
+.ring.done{opacity:0}
+.cue{position:absolute;left:max(24px,6vw);bottom:30px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);display:flex;flex-direction:column;align-items:flex-start;gap:8px;text-shadow:var(--halo);transition:opacity .6s var(--ease-out)}
+.cue i{width:1px;height:34px;background:linear-gradient(var(--navy),transparent);animation:cue 2.4s var(--ease-io) -1s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.cue.hide{opacity:0}
+@media (max-height:560px){.cue,.ring{display:none}}
+
+/* Static hero: the five gates, identical in JS */
+.static-only{display:none}
+@media (max-width: 720px), (orientation: portrait) and (max-width: 1024px), (orientation: portrait) and (pointer: coarse), (orientation: landscape) and (pointer: coarse) and (max-height: 560px), (prefers-reduced-motion: reduce){
+  .static-only{display:inline}.scrub-only{display:none}
+  .hero{height:auto}
+  .stage{position:relative;height:auto;min-height:100svh;display:flex;align-items:flex-start;background:var(--wall) url(assets/hero-ending.jpg) center 70%/cover no-repeat}
+  .stage video,.stage .poster,.stage .poster-end,.ring,.cue,.band-1,.band-2,.band-3{display:none}
+  .band-4{position:relative;left:auto;top:auto;transform:none;opacity:1;--k:1;margin:clamp(110px,18vh,170px) auto 0;padding-bottom:42vh}
+  .band-4 .w,.band-4 p,.band-4 .row{opacity:1;transform:none}
+}
+@media (max-width:720px){.band-4 .h{font-size:clamp(40px,11vw,56px)}.band-4{padding-bottom:46svh}}
+
+/* ============ SECTIONS ============ */
+main section{position:relative;scroll-margin-top:74px}
+.sec{padding:clamp(96px,13vw,168px) 0}
+
+/* Reveal choreography */
+.rv .it{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
+.rv.in .it{opacity:1;transform:none}
+.rv.in .it:nth-child(2){transition-delay:.09s}
+.rv.in .it:nth-child(3){transition-delay:.18s}
+.rv.in .it:nth-child(4){transition-delay:.27s}
+.rv.in .it:nth-child(5){transition-delay:.36s}
+.rv.done .it,.rv.done .it:nth-child(2),.rv.done .it:nth-child(3),.rv.done .it:nth-child(4),.rv.done .it:nth-child(5){transition-delay:0s}
+
+/* Two doors */
+.doors-head{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:end;margin-bottom:64px}
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.door{position:relative;background:var(--panel);border-radius:var(--radius);overflow:hidden;box-shadow:0 1px 0 var(--line),0 30px 60px -40px rgba(21,29,59,.35);display:grid;grid-template-columns:.8fr 1fr;min-height:420px;transition:transform .6s var(--ease-out),box-shadow .6s var(--ease-out)}
+.door:hover{transform:translateY(-4px);box-shadow:0 1px 0 var(--line),0 40px 70px -40px rgba(21,29,59,.45)}
+.door figure{position:relative;overflow:hidden}
+.door img{width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:transform 1.4s var(--ease-out)}
+.door:hover img{transform:scale(1.09)}
+.door .body{padding:36px 32px;display:flex;flex-direction:column}
+.door .num{font-family:var(--mono);font-size:13px;color:var(--text-secondary);letter-spacing:.12em}
+.door h3{margin:14px 0 12px;font-size:30px}
+.door p{color:var(--text-secondary)}
+.ticks{list-style:none;margin-top:auto;padding-top:22px;display:grid;gap:10px;font-size:15.5px}
+.ticks li{display:flex;gap:10px;align-items:baseline}
+.ticks li::before{content:"";flex:none;width:7px;height:7px;border-radius:2px;background:var(--navy);transform:translateY(-2px)}
+
+/* Packages */
+.pk-head{text-align:center;margin-bottom:64px}
+.pk-head .kicker{justify-content:center}
+.pk-head h2{margin-inline:auto}
+.pk-head .lede{margin-inline:auto}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+.plan{position:relative;background:var(--panel);border-radius:var(--radius);padding:34px 30px;display:flex;flex-direction:column;box-shadow:0 1px 0 var(--line),inset 0 0 0 1px var(--line);transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out)}
+.plan:hover{transform:translateY(-4px);box-shadow:0 1px 0 var(--line),inset 0 0 0 1px var(--line-strong),0 30px 50px -36px rgba(21,29,59,.4)}
+.plan .tag{position:absolute;top:22px;right:22px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:var(--accent-muted);padding:5px 10px;border-radius:999px}
+.plan h3{font-size:28px}
+.plan .for{color:var(--text-secondary);font-size:15.5px;margin-top:8px;min-height:3.2em}
+.price{display:flex;align-items:baseline;gap:8px;margin:22px 0 22px;font-family:var(--display);font-weight:700;font-size:44px;color:var(--ink);line-height:1}
+.price small{font-family:var(--body);font-size:14px;font-weight:500;color:var(--text-secondary)}
+.plan .ticks{margin:0 0 28px;padding:22px 0 0;border-top:1px solid var(--line)}
+.plan .btn{margin-top:auto;width:100%}
+.lux{margin-top:22px;border-radius:var(--radius);overflow:hidden;background:var(--navy-deep);color:var(--on-navy);display:grid;grid-template-columns:1.05fr .95fr;min-height:440px;position:relative}
+.lux .txt{padding:48px 48px 44px;display:flex;flex-direction:column}
+.lux .kicker{color:var(--on-navy-2)}
+.lux h3{color:var(--on-navy);font-size:clamp(32px,3.4vw,46px);margin:16px 0 14px;max-width:16ch}
+.lux p{color:var(--on-navy-2);max-width:46ch}
+.lux .ticks{grid-template-columns:1fr 1fr;column-gap:24px;padding-top:26px;margin-bottom:30px}
+.lux .ticks li::before{background:var(--on-navy)}
+.lux .price{color:var(--on-navy)}
+.lux .price small{color:var(--on-navy-2)}
+.lux .foot{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-top:auto}
+.lux .foot .price{margin:0}
+.lux figure{position:relative;overflow:hidden}
+.lux figure img{width:100%;height:100%;object-fit:cover}
+.lux figure::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--navy-deep),rgba(14,23,56,0) 40%)}
+.lux .glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 40% 50% at 78% 70%,rgba(47,91,234,.28),transparent 70%);opacity:.5}
+.live .lux .glow{animation:pulse 7s var(--ease-io) -2s infinite alternate}
+@keyframes pulse{to{opacity:1}}
+.addon{margin-top:22px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:22px 28px;border-radius:var(--radius);box-shadow:inset 0 0 0 1.5px var(--line-strong)}
+.addon p{font-weight:500}
+.addon p span{color:var(--text-secondary);font-weight:400}
+
+/* Reception (navy band) */
+.rez{background:var(--navy);color:var(--on-navy);overflow:hidden}
+.rez h2{color:var(--on-navy)}
+.rez .kicker{color:var(--on-navy-2)}
+.rez .lede{color:var(--on-navy-2)}
+.rez-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:72px;align-items:center}
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:28px 32px;margin:44px 0 44px}
+.feats h4{font-family:var(--body);font-weight:600;font-size:17px;margin-bottom:6px;color:var(--on-navy)}
+.feats p{font-size:15.5px;color:var(--on-navy-2)}
+.tarife{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.tarif{border-radius:12px;padding:22px 22px;box-shadow:inset 0 0 0 1px rgba(244,242,238,.2)}
+.tarif.hl{box-shadow:inset 0 0 0 1.5px rgba(244,242,238,.7)}
+.tarif h4{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-navy-2);font-weight:500}
+.tarif .price{font-size:36px;margin:10px 0 8px;color:var(--on-navy)}
+.tarif .price small{color:var(--on-navy-2)}
+.tarif p{font-size:15px;color:var(--on-navy-2)}
+.rez .note{margin-top:16px;font-size:14.5px;color:var(--on-navy-2)}
+.motes{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.motes i{position:absolute;width:3px;height:3px;border-radius:50%;background:rgba(244,242,238,.5);opacity:0}
+.live .motes i{animation:mote 16s linear infinite}
+@keyframes mote{0%{opacity:0;transform:translateY(0)}15%{opacity:.7}85%{opacity:.5}100%{opacity:0;transform:translateY(-38vh)}}
+
+/* The one interactive moment: hold to answer */
+.phone{position:relative;background:var(--canvas);color:var(--ink);border-radius:28px;padding:22px;min-height:520px;box-shadow:0 50px 90px -40px rgba(0,0,0,.6);display:flex;flex-direction:column}
+.phone .top{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);padding-bottom:16px;border-bottom:1px solid var(--line)}
+.phone .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:8px;box-shadow:0 0 0 0 rgba(47,91,234,.5)}
+.live .phone .dot{animation:ping 2s var(--ease-out) infinite}
+@keyframes ping{to{box-shadow:0 0 0 10px rgba(47,91,234,0)}}
+.ring-call{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;padding:26px 0;transition:opacity .6s var(--ease-out),transform .6s var(--ease-out)}
+.ring-call .who{font-family:var(--display);font-weight:700;font-size:28px}
+.ring-call .sub{color:var(--text-secondary);font-size:15px}
+.hold{position:relative;width:132px;height:132px;border-radius:50%;margin-top:22px;display:grid;place-items:center;background:var(--accent);color:#fff;font-weight:600;font-size:14px;line-height:1.25;text-align:center;touch-action:none;user-select:none;-webkit-user-select:none;transition:transform .35s var(--ease-out),background .35s var(--ease-out)}
+.hold:hover{background:var(--accent-hover)}
+.hold.pressing{transform:scale(.96)}
+.hold svg{position:absolute;inset:-10px;width:152px;height:152px;transform:rotate(-90deg)}
+.hold circle{fill:none;stroke-width:4}
+.hold .trk{stroke:var(--accent-muted)}
+.hold .bar{stroke:var(--accent);stroke-linecap:round;stroke-dasharray:452;stroke-dashoffset:calc(452*(1 - var(--hp,0)))}
+.hold-hint{font-size:13px;color:var(--text-secondary);margin-top:14px}
+.chat{display:none;flex-direction:column;gap:10px;padding:18px 0 90px}
+.phone.answered .ring-call{display:none}
+.phone.answered .chat{display:flex}
+.msg{max-width:86%;padding:11px 15px;border-radius:16px;font-size:15px;line-height:1.45;opacity:0;transform:translateY(10px);transition:opacity .6s var(--ease-out),transform .6s var(--ease-out)}
+.msg.on{opacity:1;transform:none}
+.msg small{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:3px}
+.msg.ki{align-self:flex-start;background:var(--panel);box-shadow:inset 0 0 0 1px var(--line);border-bottom-left-radius:4px}
+.msg.kd{align-self:flex-end;background:var(--wall);border-bottom-right-radius:4px}
+.booked{position:absolute;left:22px;right:22px;bottom:22px;display:flex;gap:14px;align-items:center;padding:14px 16px;border-radius:14px;background:var(--navy);color:var(--on-navy);opacity:0;transform:translateY(12px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+.booked.on{opacity:1;transform:none}
+.booked .cal{flex:none;width:42px;height:46px;border-radius:8px;background:var(--canvas);color:var(--ink);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:20px;line-height:1;padding-top:6px;position:relative}
+.booked .cal::before{content:"DO";position:absolute;top:0;left:0;right:0;height:14px;background:var(--accent);color:#fff;font-family:var(--mono);font-size:9px;display:grid;place-items:center;border-radius:8px 8px 0 0}
+.booked strong{display:block;font-size:15px}
+.booked span{font-size:14px;color:var(--on-navy-2)}
+.phone.answered .top span:last-child{visibility:hidden}
+.replay{position:absolute;top:21px;right:22px;padding:2px 0;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary);display:none}
+.phone.answered .replay{display:block}
+.replay:hover{color:var(--ink)}
+.phone-cap{margin-top:14px;font-size:13.5px;color:var(--on-navy-2);text-align:center}
+
+/* Steps with a self-drawing line */
+.steps-wrap{position:relative;margin-top:72px}
+.steps-line{position:absolute;left:0;right:0;top:27px;height:2px;overflow:visible}
+.steps-line path{fill:none;stroke:var(--navy);stroke-width:2;stroke-dasharray:1000;stroke-dashoffset:calc(1000*(1 - var(--dp,0)))}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:28px;position:relative}
+.steps li .n{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--canvas);box-shadow:inset 0 0 0 2px var(--navy);font-family:var(--display);font-weight:700;font-size:22px;color:var(--navy);transition:background .5s var(--ease-out),color .5s var(--ease-out)}
+.steps li.lit .n{background:var(--navy);color:var(--on-navy)}
+.steps h3{font-size:23px;margin:24px 0 10px}
+.steps p{color:var(--text-secondary);font-size:16px}
+
+/* Promises: big figures, different skeleton */
+.wort{background:var(--wall)}
+.wort-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:start}
+.promises{display:grid;gap:0}
+.promise{display:grid;grid-template-columns:250px 1fr;gap:28px;align-items:baseline;padding:30px 0;border-top:1px solid rgba(21,29,59,.16)}
+.promise:last-child{border-bottom:1px solid rgba(21,29,59,.16)}
+.promise .big{font-family:var(--display);font-weight:700;font-size:clamp(38px,3.6vw,50px);line-height:1;color:var(--navy)}
+.promise h3{font-size:22px;margin-bottom:6px}
+.promise p{color:var(--text-secondary)}
+
+/* FAQ */
+.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}
+.faq-grid .intro{position:sticky;top:120px}
+details{border-top:1px solid var(--line)}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:24px 0;font-weight:600;font-size:18.5px}
+summary::-webkit-details-marker{display:none}
+summary .pm{flex:none;position:relative;width:14px;height:14px}
+summary .pm::before,summary .pm::after{content:"";position:absolute;left:0;top:6px;width:14px;height:2px;background:var(--ink);transition:transform .4s var(--ease-out)}
+summary .pm::after{transform:rotate(90deg)}
+details[open] summary .pm::after{transform:rotate(0)}
+details .a{padding:0 40px 26px 0;color:var(--text-secondary);max-width:62ch}
+
+/* Contact */
+.kontakt-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+.contact-lines{margin-top:36px;display:grid;gap:14px;font-size:17px}
+.contact-lines a{display:inline-flex;align-items:baseline;gap:12px;border-bottom:1px solid transparent;transition:border-color .3s var(--ease-out)}
+.contact-lines a:hover{border-color:var(--ink)}
+.contact-lines .mono{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary);width:76px}
+form.card{background:var(--panel);border-radius:var(--radius);padding:36px;box-shadow:0 1px 0 var(--line),0 40px 70px -46px rgba(21,29,59,.4),inset 0 0 0 1px var(--line);display:grid;gap:18px}
+label{display:grid;gap:7px;font-size:14.5px;font-weight:500;color:var(--ink)}
+label .lb{display:block}
+label .opt{color:var(--text-secondary);font-weight:400}
+input,select,textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--canvas);border:0;border-radius:10px;padding:13px 14px;box-shadow:inset 0 0 0 1.5px var(--line-strong);transition:box-shadow .3s var(--ease-out)}
+input:focus,select:focus,textarea:focus{outline:none;box-shadow:inset 0 0 0 2px var(--accent)}
+textarea{resize:vertical;min-height:120px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+form .btn{width:100%;margin-top:4px}
+.form-note{font-size:13.5px;color:var(--text-secondary);text-align:center}
+.ok{display:none;text-align:center;padding:30px 10px}
+.ok h3{font-size:28px;margin-bottom:10px}
+.ok p{color:var(--text-secondary)}
+form.sent>*:not(.ok){display:none}
+form.sent .ok{display:block}
+
+/* Footer */
+footer{background:var(--navy-deep);color:var(--on-navy-2);padding:64px 0 40px;font-size:15px}
+footer .wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:end}
+footer .logo .word{color:var(--on-navy)}
+footer .logo .mark{background:var(--on-navy);color:#202A4B}
+footer p{margin-top:16px;max-width:44ch}
+footer nav{display:flex;gap:22px;justify-content:flex-end;flex-wrap:wrap}
+footer nav a:hover{color:var(--on-navy)}
+footer .fine{grid-column:1/-1;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:28px;border-top:1px solid rgba(244,242,238,.14);font-size:13.5px}
+
+/* Responsive */
+@media (max-width:1024px){
+  .doors-head,.rez-grid,.wort-grid,.faq-grid,.kontakt-grid{grid-template-columns:1fr;gap:40px}
+  .faq-grid .intro{position:static}
+  .doors{grid-template-columns:1fr}
+  .plans{grid-template-columns:1fr 1fr}
+  .lux{grid-template-columns:1fr}
+  .lux figure{height:260px;order:-1}
+  .lux figure::after{background:linear-gradient(0deg,var(--navy-deep),rgba(14,23,56,0) 60%)}
+  .steps{grid-template-columns:1fr 1fr;row-gap:48px}
+  .steps-line{display:none}
+}
+@media (max-width:820px){
+  .nav nav{position:fixed;top:74px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--canvas);box-shadow:0 1px 0 var(--line);padding:8px 24px 20px;transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),visibility 0s .35s}
+  .nav.open nav{opacity:1;transform:none;visibility:visible;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+  .nav.open{background:var(--canvas)}
+  .nav nav a:not(.btn){padding:14px 0;border-bottom:1px solid var(--line);font-size:17px}
+  .nav nav .btn{margin-top:16px}
+  .menu{display:grid}
+}
+@media (max-width:720px){
+  body{font-size:16.5px}
+  .wrap{width:min(1180px,100% - 32px)}
+  .plans{grid-template-columns:1fr}
+  .door{grid-template-columns:1fr}
+  .door figure{height:220px}
+  .lux .txt{padding:32px 24px}
+  .lux .ticks{grid-template-columns:1fr}
+  .feats,.tarife,.two{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .promise{grid-template-columns:1fr;gap:10px}
+  form.card{padding:24px}
+  footer .wrap{grid-template-columns:1fr}
+  footer nav{justify-content:flex-start}
+  .logo .word{font-size:19px}
+}
+
+/* Reduced motion: final states, nothing moves */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;transition-delay:0s!important;scroll-behavior:auto!important}
+  .rv .it{opacity:1;transform:none}
+  .steps-line path{stroke-dashoffset:0}
+  .motes{display:none}
+}
+body.paused *,body.paused *::before,body.paused *::after{animation-play-state:paused!important}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+<div class="env" aria-hidden="true"></div>
+<div class="seam" aria-hidden="true"><i></i><b></b></div>
+
+<header class="nav" id="top">
+  <div class="wrap">
+    <a href="#top" class="logo" aria-label="NG Customs, zum Seitenanfang"><span class="mark">NG</span><span class="word">CUSTOMS</span></a>
+    <button class="menu" aria-label="Menü" aria-expanded="false" aria-controls="menu"><span></span></button>
+    <nav id="menu" aria-label="Hauptnavigation">
+      <a href="#tueren">Leistungen</a>
+      <a href="#pakete">Pakete</a>
+      <a href="#rezeption">KI-Rezeptionistin</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#faq">Fragen</a>
+      <a href="#kontakt" class="btn small">Erstgespräch</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<section class="hero" aria-label="Einleitung">
+  <div class="stage">
+    <div class="poster" aria-hidden="true"></div>
+    <div class="poster-end" aria-hidden="true"></div>
+    <video id="hero" preload="none" muted playsinline aria-hidden="true" tabindex="-1"></video>
+    <div class="scrim" aria-hidden="true"></div>
+
+    <div class="band band-1" data-a="0" data-b="0.2">
+      <p class="sr">Ihre Kunden klopfen an. Jeden Tag. Im Netz und am Telefon.</p>
+      <div aria-hidden="true">
+        <div class="h split" data-seed="11">Ihre Kunden<br>klopfen an.<br>Jeden Tag.</div>
+        <p class="sub-soft">Im Netz und am Telefon.</p>
+      </div>
+    </div>
+
+    <div class="band band-2" data-a="0.25" data-b="0.47">
+      <p class="sr">Drei von zehn Anrufen gehen verloren. Nicht weil Sie schlecht sind. Weil Sie gerade arbeiten.</p>
+      <div aria-hidden="true" class="stack">
+        <div class="soft"><div class="h">Drei von zehn<br>Anrufen gehen<br>verloren.</div><p>Nicht weil Sie schlecht sind.<br>Weil Sie gerade arbeiten.</p></div>
+        <div class="sharp"><div class="h">Drei von zehn<br>Anrufen gehen<br>verloren.</div><p>Nicht weil Sie schlecht sind.<br>Weil Sie gerade arbeiten.</p></div>
+      </div>
+    </div>
+
+    <div class="band band-3" data-a="0.52" data-b="0.74">
+      <p class="sr">Wir bauen Ihren Empfang. Eine Webseite, die überzeugt. Eine KI, die jeden Anruf annimmt.</p>
+      <div aria-hidden="true">
+        <div class="h split words" data-seed="23">Wir bauen<br>Ihren Empfang.</div>
+        <p class="sub-soft">Eine Webseite, die überzeugt.<br>Eine KI, die jeden Anruf annimmt.</p>
+      </div>
+    </div>
+
+    <div class="band band-4" data-a="0.8" data-b="1">
+      <h1 class="sr">Jeder Kunde kommt an.</h1>
+      <div class="h split words" data-seed="37" aria-hidden="true">Jeder Kunde kommt an.</div>
+      <p>Webseiten und KI-Rezeptionistinnen für kleine und mittlere Unternehmen. Deutschlandweit, komplett online.</p>
+      <div class="row">
+        <a href="#kontakt" class="btn">Kostenloses Erstgespräch <span class="arr" aria-hidden="true">→</span></a>
+        <a href="#pakete" class="btn ghost">Pakete ansehen</a>
+      </div>
+    </div>
+
+    <svg class="ring" viewBox="0 0 48 48" aria-hidden="true"><circle class="track" cx="24" cy="24" r="20" fill="none" stroke-width="3"/><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="126" transform="rotate(-90 24 24)" style="stroke-dashoffset:var(--ld,126)"/></svg>
+    <div class="cue" aria-hidden="true">Scrollen<i></i></div>
+  </div>
+</section>
+
+<section class="sec" id="tueren">
+  <div class="wrap">
+    <div class="doors-head rv">
+      <div class="it">
+        <p class="kicker">Zwei Türen</p>
+        <h2>Ihr Kunde sucht Sie im Netz. Oder er ruft an.</h2>
+      </div>
+      <p class="lede it">An beiden Türen entscheidet sich, ob aus einer Anfrage ein Auftrag wird. Wir sorgen dafür, dass an keiner Tür jemand umdreht.</p>
+    </div>
+    <div class="doors rv">
+      <article class="door it">
+        <figure><img src="assets/door-web.jpg" alt="" width="496" height="620" loading="lazy"></figure>
+        <div class="body">
+          <span class="num">TÜR 01</span>
+          <h3>Die Webseite</h3>
+          <p>Der erste Eindruck entsteht in drei Sekunden. Ihre Seite lädt schnell, sieht auf jedem Handy gut aus und sagt klar, warum man Sie anrufen sollte.</p>
+          <ul class="ticks"><li>Eigenes Design statt Baukasten</li><li>Schnell und bei Google auffindbar</li><li>Online-Termine direkt auf der Seite</li></ul>
+        </div>
+      </article>
+      <article class="door it">
+        <figure><img src="assets/door-phone.jpg" alt="" width="560" height="700" loading="lazy"></figure>
+        <div class="body">
+          <span class="num">TÜR 02</span>
+          <h3>Das Telefon</h3>
+          <p>Sie stehen auf der Baustelle, beim Kunden oder am Behandlungsstuhl. Ihre KI-Rezeptionistin geht ran, beantwortet Fragen und trägt den Termin ein.</p>
+          <ul class="ticks"><li>Rund um die Uhr erreichbar</li><li>Termine landen in Ihrem Kalender</li><li>Nach jedem Anruf eine kurze Nachricht an Sie</li></ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="pakete" style="padding-top:0">
+  <div class="wrap">
+    <div class="pk-head rv">
+      <p class="kicker it">Pakete</p>
+      <h2 class="it">Festpreise. Ohne Kleingedrucktes.</h2>
+      <p class="lede it">Sie wissen vorher, was es kostet. Und nach dem Start sind wir weiter für Sie da.</p>
+    </div>
+    <div class="plans rv">
+      <article class="plan it">
+        <h3>Basis</h3>
+        <p class="for">Für den professionellen Start.</p>
+        <p class="price"><small>ab</small>499 €</p>
+        <ul class="ticks"><li>One-Pager mit bis zu 5 Abschnitten</li><li>Auf jedem Handy perfekt</li><li>Kontaktformular</li><li>Impressum und Datenschutz</li><li>Google Maps</li><li>SEO-Grundeinrichtung</li></ul>
+        <a href="#kontakt" class="btn ghost" data-paket="Basis">Basis anfragen</a>
+      </article>
+      <article class="plan it">
+        <span class="tag">Beliebt</span>
+        <h3>Business</h3>
+        <p class="for">Für Betriebe, die online Kunden gewinnen wollen.</p>
+        <p class="price"><small>ab</small>1.290 €</p>
+        <ul class="ticks"><li>Bis zu 8 Unterseiten</li><li>Eigenes Design</li><li>Online-Terminbuchung</li><li>Blog oder News</li><li>Erweiterte SEO</li><li>Google-Unternehmensprofil</li><li>3 Monate Betreuung</li></ul>
+        <a href="#kontakt" class="btn" data-paket="Business">Business anfragen</a>
+      </article>
+      <article class="plan it">
+        <h3>Exklusiv</h3>
+        <p class="for">Für einen Auftritt, der genau zu Ihnen passt.</p>
+        <p class="price"><small>ab</small>2.490 €</p>
+        <ul class="ticks"><li>Unbegrenzte Unterseiten</li><li>Premium-Design mit Animationen</li><li>Shop oder Buchungssystem</li><li>Mehrsprachig</li><li>Texte vom Profi</li><li>12 Monate Betreuung und Wartung</li></ul>
+        <a href="#kontakt" class="btn ghost" data-paket="Exklusiv">Exklusiv anfragen</a>
+      </article>
+    </div>
+    <article class="lux rv" id="luxus">
+      <div class="glow" aria-hidden="true"></div>
+      <div class="txt">
+        <p class="kicker it">Luxus mit Video</p>
+        <h3 class="it"><span class="scrub-only">Sie scrollen gerade durch eins.</span><span class="static-only">Am Laptop scrollen Sie oben durch einen Film.</span></h3>
+        <p class="it">Ein Film, der beim Scrollen mitläuft. Ihre Besucher bleiben hängen, weil sie so etwas noch nicht gesehen haben.</p>
+        <ul class="ticks it"><li>Alles aus Exklusiv</li><li>Eigener Scroll-Film für Ihre Startseite</li><li>Bilder und Clips für Social Media</li><li>Animationen auf der ganzen Seite</li><li>Persönliche Projektbetreuung</li><li>KI-Rezeptionistin 3 Monate inklusive</li></ul>
+        <div class="foot it">
+          <p class="price"><small>ab</small>4.990 €</p>
+          <a href="#kontakt" class="btn" data-paket="Luxus">Luxus-Beratung anfragen <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <figure aria-hidden="true"><img src="assets/hero-ending.jpg" alt="" width="1376" height="768" loading="lazy"></figure>
+    </article>
+    <div class="addon rv"><p class="it">Jedes Paket gibt es mit KI-Rezeptionistin. <span>Ab 149 € im Monat.</span></p><a href="#rezeption" class="btn ghost small it">So funktioniert sie</a></div>
+  </div>
+</section>
+
+<section class="sec rez" id="rezeption">
+  <div class="motes" aria-hidden="true"></div>
+  <div class="wrap rez-grid">
+    <div class="rv">
+      <p class="kicker it">KI-Rezeptionistin</p>
+      <h2 class="it">Sie arbeiten. Sie geht ran.</h2>
+      <p class="lede it">Ihre KI-Rezeptionistin nimmt jeden Anruf an, rund um die Uhr. Sie kennt Ihre Leistungen und Öffnungszeiten, bucht Termine direkt in Ihren Kalender und schickt Ihnen eine kurze Zusammenfassung.</p>
+      <div class="feats it">
+        <div><h4>Geht immer ran</h4><p>Nachts, am Wochenende und wenn Sie beim Kunden sind.</p></div>
+        <div><h4>Bucht selbst</h4><p>Trägt Termine in Google oder Outlook ein. Ohne Doppelbuchung.</p></div>
+        <div><h4>Klingt wie ein Mensch</h4><p>Freundlich, ruhig, mit natürlicher Stimme. Auf Deutsch und in weiteren Sprachen.</p></div>
+        <div><h4>Hält Sie auf dem Laufenden</h4><p>Nach jedem Anruf eine Nachricht per E-Mail oder SMS.</p></div>
+      </div>
+      <div class="tarife it">
+        <div class="tarif"><h4>Starter</h4><p class="price">149 €<small>/ Monat</small></p><p>Bis 100 Anrufe im Monat, 1 Kalender</p></div>
+        <div class="tarif hl"><h4>Pro</h4><p class="price">299 €<small>/ Monat</small></p><p>Bis 400 Anrufe, mehrere Kalender, SMS-Bestätigung</p></div>
+      </div>
+      <p class="note it">Einrichtung einmalig ab 299 €. Monatlich kündbar. Ihre Nummer bleibt Ihre Nummer.</p>
+    </div>
+    <div class="rv">
+      <div class="phone it" id="phone">
+        <div class="top"><span><span class="dot"></span>Eingehender Anruf</span><span>Ihr Betrieb</span></div>
+        <button class="replay" type="button">Nochmal</button>
+        <div class="ring-call">
+          <p class="who">Neue Kundin</p>
+          <p class="sub">Sie sind gerade beschäftigt.<br>Lassen Sie Ihre KI-Rezeptionistin rangehen.</p>
+          <button class="hold" type="button" aria-describedby="hold-hint"><svg viewBox="0 0 152 152" aria-hidden="true"><circle class="trk" cx="76" cy="76" r="72"/><circle class="bar" cx="76" cy="76" r="72"/></svg>Gedrückt<br>halten</button>
+          <p class="hold-hint" id="hold-hint">Halten Sie den Knopf gedrückt, um den Anruf anzunehmen.</p>
+        </div>
+        <div class="chat" aria-live="polite"></div>
+        <div class="booked" aria-live="polite"><div class="cal">14</div><div><strong>Termin eingetragen</strong><span>Do., 14:30 Uhr · Beratung · Frau Weber</span></div></div>
+      </div>
+      <p class="phone-cap">Beispielgespräch. So nimmt Ihre KI-Rezeptionistin einen Anruf an.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="ablauf">
+  <div class="wrap">
+    <div class="rv">
+      <p class="kicker it">Ablauf</p>
+      <h2 class="it">Alles online. Sie müssen nirgendwo hinfahren.</h2>
+      <p class="lede it">Wir arbeiten deutschlandweit per Videocall, Telefon und E-Mail. Das spart Ihnen Zeit, und die brauchen Sie für Ihre Kunden.</p>
+    </div>
+    <div class="steps-wrap">
+      <svg class="steps-line" viewBox="0 0 1000 2" preserveAspectRatio="none" aria-hidden="true"><path d="M28 1 H972" pathLength="1000"/></svg>
+      <ol class="steps rv">
+        <li class="it"><span class="n">1</span><h3>Erstgespräch per Videocall</h3><p>30 Minuten, kostenlos. Wir hören zu und sagen Ihnen ehrlich, was Sie brauchen und was nicht.</p></li>
+        <li class="it"><span class="n">2</span><h3>Entwurf</h3><p>Sie sehen Ihre Seite, bevor sie fertig ist. Wir ändern, bis es passt.</p></li>
+        <li class="it"><span class="n">3</span><h3>Umsetzung</h3><p>Wir bauen die Seite, drehen auf Wunsch den Film und richten Ihre KI-Rezeptionistin ein.</p></li>
+        <li class="it"><span class="n">4</span><h3>Start und Betreuung</h3><p>Ihre Seite geht online. Eine Änderung später? Eine kurze Nachricht genügt.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="sec wort" id="wort">
+  <div class="wrap wort-grid">
+    <div class="rv">
+      <p class="kicker it">Unser Wort</p>
+      <h2 class="it">Drei Dinge, auf die Sie sich verlassen können.</h2>
+    </div>
+    <div class="promises rv">
+      <div class="promise it"><span class="big">Festpreis</span><div><h3>Keine Überraschung auf der Rechnung</h3><p>Der Preis im Angebot ist der Preis auf der Rechnung. Laufende Kosten nennen wir vorher schwarz auf weiß.</p></div></div>
+      <div class="promise it"><span class="big">24 h</span><div><h3>Schnelle Antwort</h3><p>Auf jede Nachricht antworten wir innerhalb eines Werktags. Auch lange nach dem Start.</p></div></div>
+      <div class="promise it"><span class="big">100 %</span><div><h3>Ihre Seite gehört Ihnen</h3><p>Domain, Inhalte und Zugänge laufen auf Ihren Namen. Kein Knebelvertrag.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="faq">
+  <div class="wrap faq-grid">
+    <div class="intro rv">
+      <p class="kicker it">Fragen</p>
+      <h2 class="it">Was Kunden uns vorher fragen.</h2>
+      <p class="lede it">Ihre Frage ist nicht dabei? Stellen Sie sie im Erstgespräch.</p>
+    </div>
+    <div class="rv">
+      <details class="it"><summary>Klingt die KI-Rezeptionistin wie ein Roboter?<span class="pm" aria-hidden="true"></span></summary><p class="a">Nein. Sie spricht mit einer natürlichen Stimme, ruhig und freundlich. Im Erstgespräch hören Sie eine Probe und entscheiden selbst.</p></details>
+      <details class="it"><summary>Gibt es versteckte Kosten?<span class="pm" aria-hidden="true"></span></summary><p class="a">Nein. Sie bekommen einen Festpreis. Laufende Kosten wie Hosting oder die KI-Rezeptionistin nennen wir vorher schwarz auf weiß.</p></details>
+      <details class="it"><summary>Was passiert nach dem Start?<span class="pm" aria-hidden="true"></span></summary><p class="a">Wir bleiben erreichbar. Je nach Paket sind 3 oder 12 Monate Betreuung dabei. Danach gibt es Wartung zum festen Monatspreis, wenn Sie möchten.</p></details>
+      <details class="it"><summary>Sie haben kein Büro in meiner Nähe. Geht das trotzdem?<span class="pm" aria-hidden="true"></span></summary><p class="a">Ja. Wir arbeiten deutschlandweit und komplett online. Erstgespräch, Entwurf und Abstimmung laufen per Videocall, Telefon und E-Mail. So sparen Sie sich jede Fahrt.</p></details>
+      <details class="it"><summary>Wie lange dauert es?<span class="pm" aria-hidden="true"></span></summary><p class="a">Basis meist 1 bis 2 Wochen, Business 2 bis 4 Wochen. Exklusiv und Luxus planen wir gemeinsam, meist 4 bis 8 Wochen.</p></details>
+      <details class="it"><summary>Behalte ich meine Telefonnummer und meinen Kalender?<span class="pm" aria-hidden="true"></span></summary><p class="a">Ja. Die KI-Rezeptionistin arbeitet mit Ihrer bestehenden Nummer und Ihrem Kalender, zum Beispiel Google oder Outlook.</p></details>
+      <details class="it"><summary>Ist das DSGVO-konform?<span class="pm" aria-hidden="true"></span></summary><p class="a">Wir bauen datenschutzfreundlich: Schriften liegen auf Ihrem eigenen Server, es laufen keine unnötigen Dienste von Dritten, und Impressum und Datenschutzerklärung sind dabei.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="kontakt" style="padding-top:0">
+  <div class="wrap kontakt-grid">
+    <div class="rv">
+      <p class="kicker it">Erstgespräch</p>
+      <h2 class="it">Erzählen Sie uns von Ihrem Betrieb.</h2>
+      <p class="lede it">30 Minuten per Videocall, kostenlos und unverbindlich. Wir melden uns innerhalb von 24 Stunden.</p>
+      <div class="contact-lines it">
+        <a href="mailto:info@ng-customs.de"><span class="mono">E-Mail</span>info@ng-customs.de</a>
+        <a href="tel:+490000000000"><span class="mono">Telefon</span>+49 000 000 0000</a>
+      </div>
+    </div>
+    <form class="card rv" id="form" novalidate>
+      <div class="two it">
+        <label><span class="lb">Name</span><input name="name" autocomplete="name" required></label>
+        <label><span class="lb">Betrieb <span class="opt">(optional)</span></span><input name="firma" autocomplete="organization"></label>
+      </div>
+      <div class="two it">
+        <label><span class="lb">E-Mail</span><input type="email" name="email" autocomplete="email" required></label>
+        <label><span class="lb">Telefon <span class="opt">(optional)</span></span><input type="tel" name="tel" autocomplete="tel"></label>
+      </div>
+      <label class="it"><span class="lb">Was interessiert Sie?</span>
+        <select name="paket" id="paket">
+          <option>Noch unsicher, bitte beraten</option>
+          <option>Basis</option>
+          <option>Business</option>
+          <option>Exklusiv</option>
+          <option>Luxus</option>
+          <option>Nur KI-Rezeptionistin</option>
+          <option>Webseite und KI-Rezeptionistin</option>
+        </select>
+      </label>
+      <label class="it"><span class="lb">Nachricht <span class="opt">(optional)</span></span><textarea name="msg" placeholder="Was machen Sie, und was soll Ihre neue Seite oder Ihre KI für Sie erledigen?"></textarea></label>
+      <button class="btn it" type="submit">Erstgespräch anfragen <span class="arr" aria-hidden="true">→</span></button>
+      <p class="form-note it">Beim Absenden öffnet sich Ihr E-Mail-Programm mit Ihrer fertigen Nachricht an uns.</p>
+      <div class="ok" role="status"><h3>Fast geschafft.</h3><p>Ihr E-Mail-Programm hat sich geöffnet. Klicken Sie dort nur noch auf Senden, dann melden wir uns innerhalb von 24 Stunden.</p></div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a href="#top" class="logo"><span class="mark">NG</span><span class="word">CUSTOMS</span></a>
+      <p>Webseiten und KI-Rezeptionistinnen für kleine und mittlere Unternehmen. Deutschlandweit, komplett online.</p>
+    </div>
+    <nav aria-label="Rechtliches"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="#kontakt">Kontakt</a></nav>
+    <div class="fine"><span>© <span id="y">2026</span> NG Customs</span><span>Film und Bilder auf dieser Seite wurden mit KI erstellt.</span></div>
+  </div>
+</footer>
+
+<script>
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+const smoothstep = (p, e0, e1) => { const t = clamp((p - e0) / (e1 - e0), 0, 1); return t * t * (3 - 2 * t); };
+function rng(seed) { let s = seed >>> 0; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296; }
+const reduceMQ = matchMedia('(prefers-reduced-motion: reduce)');
+
+$('#y').textContent = new Date().getFullYear();
+
+/* ---------- Nav ---------- */
+const nav = $('.nav'), menu = $('.menu');
+menu.addEventListener('click', () => { const o = nav.classList.toggle('open'); menu.setAttribute('aria-expanded', o); });
+$$('#menu a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); menu.setAttribute('aria-expanded', false); }));
+
+/* ---------- Split headline text once, seeded ---------- */
+$$('.split').forEach(el => {
+  const r = rng(+el.dataset.seed || 1);
+  const wordsOnly = el.classList.contains('words');
+  const lines = el.innerHTML.split(/<br\s*\/?>/i);
+  const totalWords = el.textContent.trim().split(/\s+/).length;
+  let wi = 0;
+  el.innerHTML = lines.map(line => line.trim().split(/\s+/).map(word => {
+    const i = wi++;
+    if (wordsOnly) return `<span class="w" style="--th:${(i / totalWords * .5 + r() * .04).toFixed(3)}">${word}</span>`;
+    return `<span class="w">${[...word].map(ch => `<span class="c" style="--th:${(i / totalWords * .42 + r() * .12).toFixed(3)}">${ch}</span>`).join('')}</span>`;
+  }).join(' ')).join('<br>');
+});
+
+/* ---------- Hero scrub ---------- */
+const GATES = [
+  '(max-width: 720px)',
+  '(orientation: portrait) and (max-width: 1024px)',
+  '(orientation: portrait) and (pointer: coarse)',
+  '(orientation: landscape) and (pointer: coarse) and (max-height: 560px)',
+  '(prefers-reduced-motion: reduce)'
+];
+const VIDEO_URL = 'assets/hero-scrub.mp4';
+const VIDEO_BYTES = 1511048;
+const POSTER = 'assets/hero-poster.jpg';
+const ENDING = 'assets/hero-ending.jpg';
+const hero = $('.hero'), stage = $('.stage'), video = $('#hero');
+const ring = $('.ring'), cue = $('.cue'), posterLayer = $('.poster'), posterEnd = $('.poster-end');
+const bands = $$('.band').map((el, i) => ({ el, i, a: +el.dataset.a, b: +el.dataset.b, ramp: +el.dataset.ramp || 0, op: -1, k: -1 }));
+let target = 0, shown = 0, rafId = null, lastTick = 0, heroOnScreen = true, scrubOn = false;
+let loadK = 0, loadStart = 0;
+let seekBusy = false, pendingTime = null, videoOK = false, failed = false, endShown = -1, cueHidden = false;
+
+function heroProgress() {
+  const r = hero.getBoundingClientRect();
+  const range = hero.offsetHeight - innerHeight;
+  return range > 0 ? clamp(-r.top / range, 0, 1) : 0;
+}
+function requestSeek(t) {
+  if (!videoOK || !video.duration) return;
+  if (seekBusy) { pendingTime = t; return; }
+  seekBusy = true;
+  video.currentTime = t;
+}
+video.addEventListener('seeked', () => {
+  seekBusy = false;
+  if (pendingTime !== null) { const t = pendingTime; pendingTime = null; requestSeek(t); }
+});
+video.addEventListener('error', () => { seekBusy = false; pendingTime = null; failVideo(); });
+
+function updateCaptions(p) {
+  for (const b of bands) {
+    const f = Math.min(0.02, (b.b - b.a) / 3);
+    const inE = b.i === 0 ? 1 : smoothstep(p, b.a, b.a + f);
+    const outE = b.i === bands.length - 1 ? 0 : smoothstep(p, b.b - f, b.b);
+    const op = Math.round(inE * (1 - outE) * 1000) / 1000;
+    let k = clamp((p - b.a) / (b.ramp || Math.min(0.025, (b.b - b.a) * 0.35)), 0, 1);
+    if (b.i === 0) k = Math.max(k, loadK);
+    if (op !== b.op) { b.el.style.opacity = op; b.op = op; }
+    if (Math.abs(k - b.k) > 0.008 || (k === 1 && b.k !== 1) || (k === 0 && b.k !== 0)) { b.el.style.setProperty('--k', k.toFixed(3)); b.k = k; }
+  }
+  if (failed) {
+    const e = Math.round(smoothstep(p, 0.35, 0.8) * 100) / 100;
+    if (e !== endShown) { posterEnd.style.opacity = e; endShown = e; }
+  }
+  const hideCue = p > 0.03;
+  if (hideCue !== cueHidden) { cue.classList.toggle('hide', hideCue); cueHidden = hideCue; }
+}
+function tick(now) {
+  const dt = Math.min(100, now - (lastTick || now));
+  lastTick = now;
+  if (loadK < 1) loadK = Math.min(1, (now - loadStart) / 1400);
+  const k = 0.16;
+  shown += (target - shown) * (1 - Math.pow(1 - k, dt / 16.667));
+  if (Math.abs(target - shown) < 0.0005 && loadK >= 1) { shown = target; rafId = null; lastTick = 0; }
+  else rafId = requestAnimationFrame(tick);
+  if (video.duration) requestSeek(shown * (video.duration - 0.05));
+  updateCaptions(shown);
+}
+function kick() { if (rafId === null && heroOnScreen && scrubOn) rafId = requestAnimationFrame(tick); }
+function onScroll() { target = heroProgress(); kick(); }
+
+let heroInit = false, fetchStarted = false;
+function initHeroOnce() {
+  if (heroInit) return; heroInit = true;
+  loadStart = performance.now();
+  posterLayer.style.backgroundImage = `url('${POSTER}')`;
+  const img = new Image();
+  img.onload = startBlobFetch; img.onerror = startBlobFetch; img.src = POSTER;
+  setTimeout(startBlobFetch, 4000);
+}
+function startBlobFetch() { if (fetchStarted) return; fetchStarted = true; loadHeroBlob().catch(failVideo); }
+async function loadHeroBlob() {
+  const ctrl = new AbortController();
+  let watchdog = setTimeout(() => ctrl.abort(), 20000);
+  const res = await fetch(VIDEO_URL, { priority: 'low', signal: ctrl.signal });
+  if (!res.ok || !res.body) throw new Error('video');
+  const total = Number(res.headers.get('Content-Length')) || VIDEO_BYTES;
+  const reader = res.body.getReader();
+  const chunks = []; let got = 0, lastRing = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    clearTimeout(watchdog); watchdog = setTimeout(() => ctrl.abort(), 20000);
+    chunks.push(value); got += value.length;
+    const frac = Math.min(1, got / total), now = performance.now();
+    if (now - lastRing > 100 || frac === 1) { lastRing = now; ring.style.setProperty('--ld', Math.round(126 * (1 - frac))); }
+  }
+  clearTimeout(watchdog);
+  ring.style.setProperty('--ld', 0);
+  video.src = URL.createObjectURL(new Blob(chunks, { type: 'video/mp4' }));
+  video.load();
+  video.addEventListener('canplay', () => {
+    videoOK = true;
+    stage.classList.add('video-ready');
+    ring.classList.add('done');
+    requestSeek(heroProgress() * (video.duration - 0.05));
+  }, { once: true });
+}
+function failVideo() {
+  if (failed) return; failed = true;
+  ring.classList.add('done');
+  stage.classList.add('video-failed');
+  posterEnd.style.backgroundImage = `url('${ENDING}')`;
+  endShown = -1; updateCaptions(shown);
+}
+function enableScrub() {
+  if (scrubOn) return; scrubOn = true;
+  initHeroOnce();
+  addEventListener('scroll', onScroll, { passive: true });
+  bands.forEach(b => { b.op = -1; b.k = -1; b.el.style.removeProperty('opacity'); });
+  unpinFinalStates();
+  shown = target = heroProgress();
+  updateCaptions(shown);
+  onScroll();
+  kick();
+}
+function disableScrub() {
+  if (!scrubOn) return; scrubOn = false;
+  removeEventListener('scroll', onScroll);
+  if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
+  bands.forEach(b => { b.el.style.removeProperty('opacity'); b.el.style.removeProperty('--k'); b.op = -1; b.k = -1; });
+}
+function applyHeroMode() { if (GATES.some(q => matchMedia(q).matches)) disableScrub(); else enableScrub(); }
+const MQLS = GATES.map(q => matchMedia(q));
+MQLS.forEach(m => m.addEventListener('change', applyHeroMode));
+new IntersectionObserver(es => { heroOnScreen = es[0].isIntersecting; if (heroOnScreen) onScroll(); }).observe(hero);
+
+/* ---------- Page scroll drives: light seam, step line, nav ---------- */
+const seam = $('.seam'), stepsWrap = $('.steps-wrap'), stepsLine = $('.steps-line'), stepItems = $$('.steps li');
+let pinned = false, lastSp = -1, lastDp = -1, solid = null, drawRaf = null;
+function drawPage() {
+  drawRaf = null;
+  const doc = document.documentElement;
+  const sp = Math.round(clamp(scrollY / (doc.scrollHeight - innerHeight), 0, 1) * 1000) / 1000;
+  if (sp !== lastSp) { seam.style.setProperty('--sp', sp); lastSp = sp; }
+  const isSolid = scrollY > innerHeight * 0.4;
+  if (isSolid !== solid) { nav.classList.toggle('solid', isSolid); solid = isSolid; }
+  if (pinned) return;
+  const r = stepsWrap.getBoundingClientRect();
+  const dp = Math.round(clamp((innerHeight * 0.85 - r.top) / (innerHeight * 0.6), 0, 1) * 100) / 100;
+  if (dp !== lastDp) {
+    stepsLine.style.setProperty('--dp', dp); lastDp = dp;
+    stepItems.forEach((li, i) => li.classList.toggle('lit', dp >= i / 3 - 0.001));
+  }
+}
+addEventListener('scroll', () => { if (drawRaf === null) drawRaf = requestAnimationFrame(drawPage); }, { passive: true });
+addEventListener('resize', () => { if (drawRaf === null) drawRaf = requestAnimationFrame(drawPage); });
+
+/* ---------- Reveals and living elements ---------- */
+const rvIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  e.target.classList.add('in');
+  rvIO.unobserve(e.target);
+  setTimeout(() => e.target.classList.add('done'), 1500);
+}), { threshold: 0.14, rootMargin: '0px 0px -6% 0px' });
+$$('.rv').forEach(el => rvIO.observe(el));
+const liveIO = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('live', e.isIntersecting)));
+$$('main section').forEach(s => liveIO.observe(s));
+document.addEventListener('visibilitychange', () => document.body.classList.toggle('paused', document.hidden));
+
+const motes = $('.motes'), mr = rng(5);
+for (let i = 0; i < 18; i++) {
+  const m = document.createElement('i');
+  m.style.cssText = `left:${(mr() * 100).toFixed(1)}%;top:${(60 + mr() * 45).toFixed(1)}%;animation-delay:${(-mr() * 16).toFixed(2)}s;animation-duration:${(13 + mr() * 9).toFixed(1)}s`;
+  motes.appendChild(m);
+}
+
+/* ---------- The interactive moment: hold to answer ---------- */
+const phone = $('#phone'), hold = $('.hold'), chat = $('.chat', phone), booked = $('.booked', phone);
+const convo = [
+  ['ki', 'Guten Tag, Sie sprechen mit Lena, der digitalen Rezeption. Wie kann ich helfen?'],
+  ['kd', 'Hallo, ich hätte gern einen Beratungstermin diese Woche.'],
+  ['ki', 'Gern. Ich habe Donnerstag um 14:30 Uhr oder Freitag um 10 Uhr frei.'],
+  ['kd', 'Donnerstag passt.'],
+  ['ki', 'Perfekt. Auf welchen Namen darf ich eintragen?'],
+  ['kd', 'Weber.'],
+  ['ki', 'Danke, Frau Weber. Sie bekommen gleich eine SMS zur Bestätigung.']
+];
+let hp = 0, holding = false, holdRaf = null, holdLast = 0, answered = false, timers = [];
+function setHP(v) { hp = v; hold.style.setProperty('--hp', v.toFixed(3)); }
+function holdTick(now) {
+  const dt = Math.min(64, now - (holdLast || now)); holdLast = now;
+  if (holding) setHP(Math.min(1, hp + dt / 1300));
+  else setHP(Math.max(0, hp - (dt / 900) * Math.max(0.25, hp)));
+  if (hp >= 1) { holdRaf = null; holdLast = 0; answer(); return; }
+  if (!holding && hp <= 0) { holdRaf = null; holdLast = 0; return; }
+  holdRaf = requestAnimationFrame(holdTick);
+}
+function startHold(e) {
+  if (answered) return;
+  if (e.type === 'keydown' && e.key !== ' ' && e.key !== 'Enter') return;
+  if (e.type === 'keydown') { if (e.repeat) return; e.preventDefault(); }
+  if (reduceMQ.matches) { answer(); return; }
+  holding = true; hold.classList.add('pressing');
+  if (holdRaf === null) holdRaf = requestAnimationFrame(holdTick);
+}
+function endHold() { holding = false; hold.classList.remove('pressing'); if (holdRaf === null && hp > 0 && !answered) holdRaf = requestAnimationFrame(holdTick); }
+hold.addEventListener('pointerdown', e => { hold.setPointerCapture?.(e.pointerId); startHold(e); });
+hold.addEventListener('pointerup', endHold);
+hold.addEventListener('pointercancel', endHold);
+hold.addEventListener('lostpointercapture', endHold);
+hold.addEventListener('keydown', startHold);
+hold.addEventListener('keyup', e => { if (e.key === ' ' || e.key === 'Enter') endHold(); });
+hold.addEventListener('contextmenu', e => e.preventDefault());
+function answer() {
+  if (answered) return; answered = true; holding = false; hold.classList.remove('pressing');
+  phone.classList.add('answered');
+  chat.innerHTML = '';
+  const fast = reduceMQ.matches;
+  convo.forEach(([who, text], i) => {
+    const m = document.createElement('div');
+    m.className = 'msg ' + who;
+    m.innerHTML = `<small>${who === 'ki' ? 'KI-Rezeptionistin' : 'Anruferin'}</small>`;
+    m.append(text);
+    chat.appendChild(m);
+    if (fast) m.classList.add('on'); else timers.push(setTimeout(() => m.classList.add('on'), 250 + i * 1050));
+  });
+  if (fast) booked.classList.add('on'); else timers.push(setTimeout(() => booked.classList.add('on'), 250 + convo.length * 1050 + 300));
+}
+$('.replay', phone).addEventListener('click', () => {
+  timers.forEach(clearTimeout); timers = [];
+  answered = false; setHP(0); phone.classList.remove('answered'); booked.classList.remove('on'); chat.innerHTML = '';
+  hold.focus();
+});
+
+/* ---------- Reduced motion, live in both directions ---------- */
+function pinToFinalStates() {
+  pinned = true;
+  stepsLine.style.setProperty('--dp', 1); stepItems.forEach(li => li.classList.add('lit'));
+  $$('.rv').forEach(el => el.classList.add('in', 'done'));
+  if (holding) { answer(); }
+}
+function unpinFinalStates() {
+  if (!pinned) return; pinned = false; lastDp = -1; drawPage();
+}
+reduceMQ.addEventListener('change', e => { if (e.matches) pinToFinalStates(); else applyHeroMode(); });
+if (reduceMQ.matches) pinToFinalStates();
+
+/* ---------- Packages preselect + form (mailto) ---------- */
+const sel = $('#paket');
+$$('[data-paket]').forEach(b => b.addEventListener('click', () => { sel.value = b.dataset.paket; }));
+const form = $('#form');
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const bad = $$('[required]', form).find(i => !i.checkValidity());
+  if (bad) { bad.focus(); bad.reportValidity(); return; }
+  const f = new FormData(form);
+  const subject = `Erstgespräch: ${f.get('paket')}`;
+  const body = `Name: ${f.get('name')}\nBetrieb: ${f.get('firma') || '-'}\nE-Mail: ${f.get('email')}\nTelefon: ${f.get('tel') || '-'}\nInteresse: ${f.get('paket')}\n\n${f.get('msg') || ''}`;
+  location.href = `mailto:info@ng-customs.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  form.classList.add('sent');
+});
+
+applyHeroMode();
+drawPage();
+})();
+</script>
+</body>
+</html>

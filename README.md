@@ -1,9 +1,17 @@
-# NG Customs – Webseiten & KI-Agentur
+# NG Customs · Webseite
 
-Statische Webseite (HTML/CSS/JS, kein Build nötig). `index.html` im Browser öffnen oder auf einen beliebigen Webspace hochladen.
+Cinematische Scroll-Webseite für NG Customs (Webseiten und KI-Rezeptionistinnen für KMU).
+Gebaut nach der Anleitung „10K Websites“ (`10k-websites-skill.zip`).
 
-## Anpassen
-- **Preise & Paketinhalte:** in `index.html`, Abschnitte `#pakete`, `#luxus`, `#ki-rezeption`
-- **Kontaktdaten:** E-Mail/Telefon in `index.html` und `script.js` (mailto-Adresse)
-- **Hero-Video (Luxus):** Datei als `assets/hero.mp4` ablegen – bis dahin wird ein animierter Platzhalter gezeigt
-- **Impressum / Datenschutz:** `impressum.html`, `datenschutz.html` mit echten Angaben füllen
+- `website/` ist der Ordner, der online geht: `index.html` plus `assets/` (Film, Bilder, Schriften).
+  Kein Build, keine Frameworks, Schriften liegen lokal (DSGVO).
+- Vorschau mit Scroll-Film: im Ordner `website/` einen lokalen Server starten
+  (`python3 -m http.server` oder `npx http-server`) und `http://localhost:8000` öffnen.
+  Doppelklick auf `index.html` zeigt die Standbild-Variante.
+- Film und Bilder wurden mit KI erstellt (Higgsfield), das steht auch im Footer.
+
+## Vor dem Livegang
+- Echte E-Mail-Adresse und Telefonnummer (in `index.html`: Kontaktbereich und `mailto:` im Skript)
+- Preise prüfen (Pakete und KI-Rezeptionistin)
+- `impressum.html` und `datenschutz.html` mit echten Angaben füllen
+- `og:image` und `og:url` beim Deploy auf die Live-Adresse setzen (Kommentar `DEPLOY STEP`)
