@@ -1056,7 +1056,7 @@ hold.addEventListener('keyup', e => { if (e.key === ' ' || e.key === 'Enter') en
 hold.addEventListener('contextmenu', e => e.preventDefault());
 /* Voice: a recorded demo call (assets/call-demo.mp3), started only by the visitor's hold.
    CUES are the start times in seconds of each line in that file. */
-const CUES = [0.35, 6.55, 10.27, 16.41, 17.92, 22.29, 23.22];
+const CUES = [0.3, 5.53, 8.65, 13.82, 15.0, 18.64, 19.3];
 const callAudio = new Audio('assets/call-demo.mp3');
 callAudio.preload = 'auto';
 const soundBtn = $('.sound'), soundLabel = $('.slabel');
