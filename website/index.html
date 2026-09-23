@@ -198,8 +198,35 @@ main section{position:relative;scroll-margin-top:74px}
 .door{position:relative;background:var(--panel);border-radius:var(--radius);overflow:hidden;box-shadow:0 1px 0 var(--line),0 30px 60px -40px rgba(21,29,59,.35);display:grid;grid-template-columns:.8fr 1fr;min-height:420px;transition:transform .6s var(--ease-out),box-shadow .6s var(--ease-out)}
 .door:hover{transform:translateY(-4px);box-shadow:0 1px 0 var(--line),0 40px 70px -40px rgba(21,29,59,.45)}
 .door figure{position:relative;overflow:hidden}
-.door img{width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:transform 1.4s var(--ease-out)}
-.door:hover img{transform:scale(1.09)}
+.door figure.mock{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse 80% 70% at 50% 40%,#FFFFFF 0%,var(--wall) 100%);padding:28px 20px}
+.browser{width:min(100%,250px);background:var(--panel);border-radius:10px;box-shadow:0 1px 0 var(--line),0 24px 40px -24px rgba(21,29,59,.45);overflow:hidden}
+.b-bar{display:flex;align-items:center;gap:5px;padding:9px 10px;background:#ECE8E2}
+.b-bar i{width:7px;height:7px;border-radius:50%;background:#C9C3BA}
+.b-url{margin-left:8px;flex:1;font-family:var(--mono);font-size:9.5px;color:var(--text-secondary);background:var(--panel);border-radius:999px;padding:3px 8px}
+.b-body{display:grid;gap:7px;padding:14px 14px 16px}
+.b-logo{width:22px;height:22px;background:var(--navy)}
+.b-h{height:11px;border-radius:3px;background:var(--ink);width:88%;margin-top:6px}
+.b-h.short{width:58%;margin-top:0}
+.b-t{height:6px;border-radius:3px;background:var(--line);width:92%}
+.b-btn{justify-self:start;margin-top:6px;font-size:10.5px;font-weight:600;color:#fff;background:var(--accent);padding:6px 11px;border-radius:999px;position:relative}
+.b-btn::after{content:"";position:absolute;inset:-4px;border-radius:999px;box-shadow:0 0 0 2px var(--accent-muted);opacity:0}
+.live .b-btn::after{animation:glowp 3.2s var(--ease-io) -1s infinite}
+@keyframes glowp{0%,100%{opacity:0}50%{opacity:1}}
+.b-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.b-cards span{height:34px;border-radius:5px;background:var(--wall)}
+.b-toast{position:relative;z-index:1;align-self:center;margin:-18px 0 0 70px;background:var(--navy);color:var(--on-navy-2);font-size:11px;line-height:1.35;padding:9px 12px;border-radius:10px;box-shadow:0 14px 24px -14px rgba(14,23,56,.7)}
+.b-toast b{display:block;color:var(--on-navy);font-size:11.5px}
+.b-toast.p{margin:-16px 0 0}
+.mphone{position:relative;width:150px;height:260px;border-radius:26px;background:var(--navy-deep);box-shadow:inset 0 0 0 5px #2A3563,0 24px 40px -22px rgba(14,23,56,.6);display:flex;flex-direction:column;align-items:center;padding:30px 12px 30px;color:var(--on-navy);text-align:center}
+.m-notch{position:absolute;top:10px;width:44px;height:6px;border-radius:4px;background:#2A3563}
+.m-label{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--on-navy-2)}
+.m-who{font-family:var(--display);font-weight:700;font-size:19px;margin-top:10px}
+.m-num{font-size:10px;color:var(--on-navy-2);margin-top:2px}
+.m-ring{position:relative;display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--accent);margin-top:auto}
+.m-ring::before{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 0 rgba(47,91,234,.6)}
+.live .m-ring::before{animation:ping 1.8s var(--ease-out) -.4s infinite}
+.m-ring i{width:16px;height:6px;border-radius:6px 6px 2px 2px;background:#fff;transform:rotate(-20deg)}
+.m-ki{font-size:9.5px;color:var(--on-navy-2);margin-top:10px}
 .door .body{padding:36px 32px;display:flex;flex-direction:column}
 .door .num{font-family:var(--mono);font-size:13px;color:var(--text-secondary);letter-spacing:.12em}
 .door h3{margin:14px 0 12px;font-size:30px}
@@ -329,7 +356,15 @@ main section{position:relative;scroll-margin-top:74px}
 .replay{position:absolute;top:21px;right:22px;padding:2px 0;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary);display:none}
 .phone.answered .replay{display:block}
 .replay:hover{color:var(--ink)}
-.phone-cap{margin-top:14px;font-size:13.5px;color:var(--on-navy-2);text-align:center}
+.phone-foot{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:16px}
+.phone-cap{font-size:13.5px;color:var(--on-navy-2);text-align:center;max-width:44ch}
+.sound{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;font-size:13.5px;font-weight:600;color:var(--on-navy);box-shadow:inset 0 0 0 1.5px rgba(244,242,238,.4);transition:box-shadow .3s var(--ease-out)}
+.sound:hover{box-shadow:inset 0 0 0 1.5px var(--on-navy)}
+.sico{position:relative;width:14px;height:12px}
+.sico::before{content:"";position:absolute;left:0;top:3px;width:5px;height:6px;background:currentColor;clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
+.sico::after{content:"";position:absolute;left:3px;top:0;width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-right:7px solid currentColor}
+.sound[aria-pressed="true"] .sico{box-shadow:6px 0 0 -4px currentColor}
+.sound[aria-pressed="false"]{opacity:.7}
 
 /* Steps with a self-drawing line */
 .steps-wrap{position:relative;margin-top:72px}
@@ -421,7 +456,7 @@ footer .fine{grid-column:1/-1;display:flex;justify-content:space-between;gap:20p
   .wrap{width:min(1180px,100% - 32px)}
   .plans{grid-template-columns:minmax(0,1fr)}
   .door{grid-template-columns:minmax(0,1fr)}
-  .door figure{height:220px}
+  .door figure{height:300px}
   .lux .txt{padding:32px 24px}
   .lux .ticks{grid-template-columns:minmax(0,1fr)}
   .feats,.tarife,.two{grid-template-columns:minmax(0,1fr)}
@@ -523,7 +558,19 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     </div>
     <div class="doors rv">
       <article class="door it">
-        <figure><img src="assets/door-web.jpg" alt="" width="496" height="620" loading="lazy"></figure>
+        <figure class="mock" aria-hidden="true">
+          <div class="browser">
+            <div class="b-bar"><i></i><i></i><i></i><span class="b-url">ihr-betrieb.at</span></div>
+            <div class="b-body">
+              <span class="b-logo"></span>
+              <span class="b-h"></span><span class="b-h short"></span>
+              <span class="b-t"></span><span class="b-t"></span>
+              <span class="b-btn">Termin buchen</span>
+              <div class="b-cards"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+          <div class="b-toast"><b>Neue Anfrage</b>über Ihre Webseite</div>
+        </figure>
         <div class="body">
           <span class="num">TÜR 01</span>
           <h3>Die Webseite</h3>
@@ -532,7 +579,17 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         </div>
       </article>
       <article class="door it">
-        <figure><img src="assets/door-phone.jpg" alt="" width="560" height="700" loading="lazy"></figure>
+        <figure class="mock" aria-hidden="true">
+          <div class="mphone">
+            <span class="m-notch"></span>
+            <span class="m-label">Eingehender Anruf</span>
+            <span class="m-who">Neukunde</span>
+            <span class="m-num">+43 6xx xxx xxx</span>
+            <span class="m-ring"><i></i></span>
+            <span class="m-ki">KI-Rezeptionistin nimmt an</span>
+          </div>
+          <div class="b-toast p"><b>Termin eingetragen</b>Do., 14:30 Uhr</div>
+        </figure>
         <div class="body">
           <span class="num">TÜR 02</span>
           <h3>Das Telefon</h3>
@@ -633,7 +690,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         <div class="chat" aria-live="polite"></div>
         <div class="booked" aria-live="polite"><div class="cal">14</div><div><strong>Termin eingetragen</strong><span>Do., 14:30 Uhr · Beratung · Frau Weber</span></div></div>
       </div>
-      <p class="phone-cap">Beispielgespräch. So nimmt Ihre KI-Rezeptionistin einen Anruf an.</p>
+      <div class="phone-foot"><button class="sound" type="button" aria-pressed="true"><span class="sico" aria-hidden="true"></span><span class="slabel">Ton an</span></button><p class="phone-cap">Beispielgespräch mit der Vorlesestimme Ihres Geräts. Ihre echte KI-Rezeptionistin klingt deutlich natürlicher.</p></div>
     </div>
   </div>
 </section>
@@ -778,10 +835,12 @@ const GATES = [
   '(orientation: landscape) and (pointer: coarse) and (max-height: 560px)',
   '(prefers-reduced-motion: reduce)'
 ];
-const VIDEO_URL = 'assets/hero-scrub.mp4';
-const VIDEO_BYTES = 1511048;
-const POSTER = 'assets/hero-poster.jpg';
-const ENDING = 'assets/hero-ending.jpg';
+// Portrait screens get their own centre crop in full sharpness, landscape screens the wide film.
+const PORTRAIT = matchMedia('(orientation: portrait)').matches;
+const VIDEO_URL = PORTRAIT ? 'assets/hero-scrub-m.mp4' : 'assets/hero-scrub.mp4';
+const VIDEO_BYTES = PORTRAIT ? 2380033 : 4750311;
+const POSTER = PORTRAIT ? 'assets/hero-poster-m.jpg' : 'assets/hero-poster.jpg';
+const ENDING = PORTRAIT ? 'assets/hero-ending-m.jpg' : 'assets/hero-ending.jpg';
 const hero = $('.hero'), stage = $('.stage'), video = $('#hero');
 const ring = $('.ring'), cue = $('.cue'), posterLayer = $('.poster'), posterEnd = $('.poster-end');
 const bands = $$('.band').map((el, i) => ({ el, i, a: +el.dataset.a, b: +el.dataset.b, ramp: +el.dataset.ramp || 0, op: -1, k: -1 }));
@@ -995,23 +1054,78 @@ hold.addEventListener('lostpointercapture', endHold);
 hold.addEventListener('keydown', startHold);
 hold.addEventListener('keyup', e => { if (e.key === ' ' || e.key === 'Enter') endHold(); });
 hold.addEventListener('contextmenu', e => e.preventDefault());
+/* Voice: the device's own speech engine, started only by the visitor's hold */
+const synth = 'speechSynthesis' in window ? window.speechSynthesis : null;
+const soundBtn = $('.sound'), soundLabel = $('.slabel');
+let soundOn = !!synth, unlocked = false, voices = [];
+if (!synth) { soundBtn.hidden = true; }
+function loadVoices() { try { voices = synth.getVoices().filter(v => /^de/i.test(v.lang)); } catch { voices = []; } }
+if (synth) { loadVoices(); synth.addEventListener?.('voiceschanged', loadVoices); }
+function pickVoice(who) {
+  if (!voices.length) return null;
+  const at = voices.filter(v => /de[-_]AT/i.test(v.lang));
+  const pool = at.length ? at.concat(voices) : voices;
+  const female = /anna|petra|helena|katja|marlene|vicki|hedda|google|female|sabina|ingrid/i;
+  const male = /markus|yannick|stefan|hans|klaus|male|conrad|jonas/i;
+  if (who === 'ki') return pool.find(v => female.test(v.name)) || pool[0];
+  return voices.find(v => male.test(v.name)) || voices.find(v => v !== pickVoice('ki')) || voices[0];
+}
+function unlockVoice() {
+  if (!synth || unlocked || !soundOn) return;
+  try { const u = new SpeechSynthesisUtterance(' '); u.volume = 0; synth.speak(u); unlocked = true; } catch {}
+}
+function speak(text, who, done) {
+  if (!synth || !soundOn) { done(false); return; }
+  let finished = false;
+  const finish = () => { if (finished) return; finished = true; clearTimeout(safety); done(true); };
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'de-AT';
+  const v = pickVoice(who); if (v) { u.voice = v; u.lang = v.lang; }
+  u.rate = who === 'ki' ? 1.02 : 1.06;
+  u.pitch = who === 'ki' ? 1.08 : 0.9;
+  u.onend = finish; u.onerror = finish;
+  const safety = setTimeout(finish, 1800 + text.length * 95);
+  timers.push(safety);
+  synth.speak(u);
+}
+soundBtn.addEventListener('click', () => {
+  soundOn = !soundOn;
+  soundBtn.setAttribute('aria-pressed', soundOn);
+  soundLabel.textContent = soundOn ? 'Ton an' : 'Ton aus';
+  if (!soundOn && synth) synth.cancel();
+});
+hold.addEventListener('pointerdown', unlockVoice);
+hold.addEventListener('keydown', unlockVoice);
+
+let runId = 0;
 function answer() {
   if (answered) return; answered = true; holding = false; hold.classList.remove('pressing');
   phone.classList.add('answered');
   chat.innerHTML = '';
-  const fast = reduceMQ.matches;
-  convo.forEach(([who, text], i) => {
+  const fast = reduceMQ.matches, id = ++runId;
+  const msgs = convo.map(([who, text]) => {
     const m = document.createElement('div');
     m.className = 'msg ' + who;
     m.innerHTML = `<small>${who === 'ki' ? 'KI-Rezeptionistin' : 'Anruferin'}</small>`;
     m.append(text);
     chat.appendChild(m);
-    if (fast) m.classList.add('on'); else timers.push(setTimeout(() => m.classList.add('on'), 250 + i * 1050));
+    if (fast) m.classList.add('on');
+    return m;
   });
-  if (fast) booked.classList.add('on'); else timers.push(setTimeout(() => booked.classList.add('on'), 250 + convo.length * 1050 + 300));
+  const finishAll = () => { if (id === runId) timers.push(setTimeout(() => booked.classList.add('on'), fast ? 0 : 300)); };
+  let i = 0;
+  const next = () => {
+    if (id !== runId) return;
+    if (i >= convo.length) { finishAll(); return; }
+    const [who, text] = convo[i], m = msgs[i]; i++;
+    m.classList.add('on');
+    speak(text, who, spoke => { if (id !== runId) return; timers.push(setTimeout(next, spoke ? 260 : 1050)); });
+  };
+  timers.push(setTimeout(next, fast ? 0 : 250));
 }
 $('.replay', phone).addEventListener('click', () => {
-  timers.forEach(clearTimeout); timers = [];
+  runId++; timers.forEach(clearTimeout); timers = [];
+  if (synth) synth.cancel();
   answered = false; setHP(0); phone.classList.remove('answered'); booked.classList.remove('on'); chat.innerHTML = '';
   hold.focus();
 });
