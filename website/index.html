@@ -7,7 +7,7 @@
 <meta name="description" content="NG Customs aus Wien baut Webseiten und KI-Rezeptionistinnen für kleine und mittlere Unternehmen in ganz Österreich. Festpreise, persönlich vor Ort oder online.">
 <meta name="theme-color" content="#F4F2EE">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%23202A4B'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-weight='700' font-size='26' fill='%23F9FAF5' text-anchor='middle'%3ENG%3C/text%3E%3C/svg%3E">
-<meta property="og:title" content="NG Customs · Jeder Kunde kommt an.">
+<meta property="og:title" content="NG Customs · Jeder verpasste Anruf kostet Sie Geld.">
 <meta property="og:description" content="Webseiten und KI-Rezeptionistinnen für kleine und mittlere Unternehmen in ganz Österreich. Aus Wien, persönlich vor Ort oder online.">
 <meta property="og:type" content="website">
 <!-- DEPLOY STEP: og:image und og:url mit der Live-Adresse (absolut) patchen -->
@@ -141,6 +141,8 @@ h3{font-size:26px}
 .band-4 p{opacity:clamp(0,(var(--k,0) - .62)*4,1);transform:translateY(calc((1 - clamp(0,(var(--k,0) - .62)*4,1))*14px))}
 .band-4 .row{opacity:clamp(0,(var(--k,0) - .78)*5,1);transform:translateY(calc((1 - clamp(0,(var(--k,0) - .78)*5,1))*14px))}
 .band .sub-soft{opacity:var(--k,0)}
+.band p.sub-punch{font-family:var(--display);font-weight:700;font-size:clamp(24px,2.3vw,34px);line-height:1.15;color:var(--ink);margin-top:14px}
+.band .sub-punch+p{margin-top:10px}
 .ring{position:absolute;right:28px;bottom:28px;width:44px;height:44px;color:var(--navy);transition:opacity .6s var(--ease-out)}
 .ring circle.track{stroke:rgba(26,37,80,.15)}
 .ring.done{opacity:0}
@@ -196,7 +198,7 @@ main section{position:relative;scroll-margin-top:74px}
 .pk-head .kicker{justify-content:center}
 .pk-head h2{margin-inline:auto}
 .pk-head .lede{margin-inline:auto}
-.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+.plans{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;align-items:stretch}
 .plan{position:relative;background:var(--panel);border-radius:var(--radius);padding:34px 30px;display:flex;flex-direction:column;box-shadow:0 1px 0 var(--line),inset 0 0 0 1px var(--line);transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out)}
 .plan:hover{transform:translateY(-4px);box-shadow:0 1px 0 var(--line),inset 0 0 0 1px var(--line-strong),0 30px 50px -36px rgba(21,29,59,.4)}
 .plan .tag{position:absolute;top:22px;right:22px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:var(--accent-muted);padding:5px 10px;border-radius:999px}
@@ -223,7 +225,7 @@ main section{position:relative;scroll-margin-top:74px}
 .lux .glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 40% 50% at 78% 70%,rgba(47,91,234,.28),transparent 70%);opacity:.5}
 .live .lux .glow{animation:pulse 7s var(--ease-io) -2s infinite alternate}
 @keyframes pulse{to{opacity:1}}
-.addon{margin-top:22px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:22px 28px;border-radius:var(--radius);box-shadow:inset 0 0 0 1.5px var(--line-strong)}
+.addon{margin-top:16px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:22px 28px;border-radius:var(--radius);box-shadow:inset 0 0 0 1.5px var(--line-strong)}
 .addon p{font-weight:500}
 .addon p span{color:var(--text-secondary);font-weight:400}
 
@@ -428,18 +430,19 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     <div class="scrim" aria-hidden="true"></div>
 
     <div class="band band-1" data-a="0" data-b="0.2">
-      <p class="sr">Ihre Kunden klopfen an. Jeden Tag. Im Netz und am Telefon.</p>
+      <p class="sr">Ihr Telefon klingelt. Sie haben keine Hand frei. Auf der Baustelle, beim Kunden, mitten in der Arbeit.</p>
       <div aria-hidden="true">
-        <div class="h split" data-seed="11">Ihre Kunden<br>klopfen an.<br>Jeden Tag.</div>
-        <p class="sub-soft">Im Netz und am Telefon.</p>
+        <div class="h split" data-seed="11">Ihr Telefon<br>klingelt.</div>
+        <p class="sub-soft sub-punch">Sie haben keine Hand frei.</p>
+        <p class="sub-soft">Auf der Baustelle, beim Kunden,<br>mitten in der Arbeit.</p>
       </div>
     </div>
 
     <div class="band band-2" data-a="0.25" data-b="0.47">
-      <p class="sr">Drei von zehn Anrufen gehen verloren. Nicht weil Sie schlecht sind. Weil Sie gerade arbeiten.</p>
+      <p class="sr">Der Kunde legt auf. Und ruft die Konkurrenz an. So gehen drei von zehn Anrufen verloren.</p>
       <div aria-hidden="true" class="stack">
-        <div class="soft"><div class="h">Drei von zehn<br>Anrufen gehen<br>verloren.</div><p>Nicht weil Sie schlecht sind.<br>Weil Sie gerade arbeiten.</p></div>
-        <div class="sharp"><div class="h">Drei von zehn<br>Anrufen gehen<br>verloren.</div><p>Nicht weil Sie schlecht sind.<br>Weil Sie gerade arbeiten.</p></div>
+        <div class="soft"><div class="h">Der Kunde<br>legt auf.</div><p class="sub-punch">Und ruft die Konkurrenz an.</p><p>So gehen drei von zehn<br>Anrufen verloren.</p></div>
+        <div class="sharp"><div class="h">Der Kunde<br>legt auf.</div><p class="sub-punch">Und ruft die Konkurrenz an.</p><p>So gehen drei von zehn<br>Anrufen verloren.</p></div>
       </div>
     </div>
 
@@ -452,11 +455,11 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     </div>
 
     <div class="band band-4" data-a="0.8" data-b="1">
-      <h1 class="sr">Jeder Kunde kommt an.</h1>
-      <div class="h split words" data-seed="37" aria-hidden="true">Jeder Kunde kommt an.</div>
-      <p>Webseiten und KI-Rezeptionistinnen für kleine und mittlere Unternehmen in ganz Österreich. Aus Wien, persönlich vor Ort oder online.</p>
+      <h1 class="sr">Jeder verpasste Anruf kostet Sie Geld.</h1>
+      <div class="h split words" data-seed="37" aria-hidden="true">Jeder verpasste Anruf<br>kostet Sie Geld.</div>
+      <p>Ab heute geht jeder Anruf an Ihre KI-Rezeptionistin statt an die Konkurrenz. Dazu eine Webseite, die überzeugt. Für KMU in ganz Österreich.</p>
       <div class="row">
-        <a href="#kontakt" class="btn">Kostenloses Erstgespräch <span class="arr" aria-hidden="true">→</span></a>
+        <a href="#kontakt" class="btn">Kostenloses Erstgespräch sichern <span class="arr" aria-hidden="true">→</span></a>
         <a href="#pakete" class="btn ghost">Pakete ansehen</a>
       </div>
     </div>
@@ -509,41 +512,35 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
       <article class="plan it">
         <h3>Basis</h3>
         <p class="for">Für den professionellen Start.</p>
-        <p class="price"><small>ab</small>499 €</p>
-        <ul class="ticks"><li>One-Pager mit bis zu 5 Abschnitten</li><li>Auf jedem Handy perfekt</li><li>Kontaktformular</li><li>Impressum und Datenschutz</li><li>Google Maps</li><li>SEO-Grundeinrichtung</li></ul>
+        <p class="price"><small>ab</small>890 €</p>
+        <ul class="ticks"><li>Bis zu 3 Seiten</li><li>Auf jedem Handy perfekt</li><li>Kontaktformular</li><li>Impressum und Datenschutz</li><li>Google Maps</li><li>SEO-Grundeinrichtung</li></ul>
         <a href="#kontakt" class="btn ghost" data-paket="Basis">Basis anfragen</a>
       </article>
       <article class="plan it">
         <span class="tag">Beliebt</span>
         <h3>Business</h3>
         <p class="for">Für Betriebe, die online Kunden gewinnen wollen.</p>
-        <p class="price"><small>ab</small>1.290 €</p>
+        <p class="price"><small>ab</small>1.490 €</p>
         <ul class="ticks"><li>Bis zu 8 Unterseiten</li><li>Eigenes Design</li><li>Online-Terminbuchung</li><li>Blog oder News</li><li>Erweiterte SEO</li><li>Google-Unternehmensprofil</li><li>3 Monate Betreuung</li></ul>
         <a href="#kontakt" class="btn" data-paket="Business">Business anfragen</a>
-      </article>
-      <article class="plan it">
-        <h3>Exklusiv</h3>
-        <p class="for">Für einen Auftritt, der genau zu Ihnen passt.</p>
-        <p class="price"><small>ab</small>2.490 €</p>
-        <ul class="ticks"><li>Unbegrenzte Unterseiten</li><li>Premium-Design mit Animationen</li><li>Shop oder Buchungssystem</li><li>Mehrsprachig</li><li>Texte vom Profi</li><li>12 Monate Betreuung und Wartung</li></ul>
-        <a href="#kontakt" class="btn ghost" data-paket="Exklusiv">Exklusiv anfragen</a>
       </article>
     </div>
     <article class="lux rv" id="luxus">
       <div class="glow" aria-hidden="true"></div>
       <div class="txt">
-        <p class="kicker it">Luxus mit Video</p>
+        <p class="kicker it">Luxus · Webseite mit Film</p>
         <h3 class="it"><span class="scrub-only">Sie scrollen gerade durch eins.</span><span class="static-only">Am Laptop scrollen Sie oben durch einen Film.</span></h3>
-        <p class="it">Ein Film, der beim Scrollen mitläuft. Ihre Besucher bleiben hängen, weil sie so etwas noch nicht gesehen haben.</p>
-        <ul class="ticks it"><li>Alles aus Exklusiv</li><li>Eigener Scroll-Film für Ihre Startseite</li><li>Bilder und Clips für Social Media</li><li>Animationen auf der ganzen Seite</li><li>Persönliche Projektbetreuung</li><li>KI-Rezeptionistin 3 Monate inklusive</li></ul>
+        <p class="it">Alles, was eine starke Webseite braucht, plus ein Film, der beim Scrollen mitläuft. Ihre Besucher bleiben hängen, weil sie so etwas noch nicht gesehen haben.</p>
+        <ul class="ticks it"><li>Eigener Scroll-Film für Ihre Startseite</li><li>Unbegrenzte Unterseiten</li><li>Premium-Design mit Animationen</li><li>Shop oder Buchungssystem</li><li>Mehrsprachig</li><li>Texte vom Profi</li><li>Bilder und Clips für Social Media</li><li>12 Monate Betreuung und Wartung</li></ul>
         <div class="foot it">
-          <p class="price"><small>ab</small>4.990 €</p>
-          <a href="#kontakt" class="btn" data-paket="Luxus">Luxus-Beratung anfragen <span class="arr" aria-hidden="true">→</span></a>
+          <p class="price"><small>ab</small>3.890 €</p>
+          <a href="#kontakt" class="btn" data-paket="Luxus">Luxus anfragen <span class="arr" aria-hidden="true">→</span></a>
         </div>
       </div>
       <figure aria-hidden="true"><img src="assets/hero-ending.jpg" alt="" width="1376" height="768" loading="lazy"></figure>
     </article>
-    <div class="addon rv"><p class="it">Jedes Paket gibt es mit KI-Rezeptionistin. <span>Ab 149 € im Monat.</span></p><a href="#rezeption" class="btn ghost small it">So funktioniert sie</a></div>
+    <div class="addon rv"><p class="it">Zusatz: KI-Rezeptionistin zu jedem Paket. <span>Ab 199 € im Monat, Einrichtung einmalig 490 €.</span></p><a href="#rezeption" class="btn ghost small it">So funktioniert sie</a></div>
+    <div class="addon rv"><p class="it">Sorglos-Paket für Ihre Webseite. <span>Hosting, Updates und kleine Änderungen für 39 € im Monat.</span></p><a href="#kontakt" class="btn ghost small it">Anfragen</a></div>
   </div>
 </section>
 
@@ -561,10 +558,10 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         <div><h4>Hält Sie auf dem Laufenden</h4><p>Nach jedem Anruf eine Nachricht per E-Mail oder SMS.</p></div>
       </div>
       <div class="tarife it">
-        <div class="tarif"><h4>Starter</h4><p class="price">149 €<small>/ Monat</small></p><p>Bis 100 Anrufe im Monat, 1 Kalender</p></div>
-        <div class="tarif hl"><h4>Pro</h4><p class="price">299 €<small>/ Monat</small></p><p>Bis 400 Anrufe, mehrere Kalender, SMS-Bestätigung</p></div>
+        <div class="tarif"><h4>Starter</h4><p class="price">199 €<small>/ Monat</small></p><p>Bis 150 Anrufe im Monat, 1 Kalender</p></div>
+        <div class="tarif hl"><h4>Pro</h4><p class="price">349 €<small>/ Monat</small></p><p>Bis 500 Anrufe, mehrere Kalender, SMS-Bestätigung</p></div>
       </div>
-      <p class="note it">Einrichtung einmalig ab 299 €. Monatlich kündbar. Ihre Nummer bleibt Ihre Nummer.</p>
+      <p class="note it">Einrichtung einmalig 490 €. Zu jedem Paket buchbar, auch ohne neue Webseite. Monatlich kündbar, Ihre Nummer bleibt Ihre Nummer. Ein einziger gewonnener Auftrag zahlt meist mehrere Monate.</p>
     </div>
     <div class="rv">
       <div class="phone it" id="phone">
@@ -627,9 +624,9 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     <div class="rv">
       <details class="it"><summary>Klingt die KI-Rezeptionistin wie ein Roboter?<span class="pm" aria-hidden="true"></span></summary><p class="a">Nein. Sie spricht mit einer natürlichen Stimme, ruhig und freundlich. Im Erstgespräch hören Sie eine Probe und entscheiden selbst.</p></details>
       <details class="it"><summary>Gibt es versteckte Kosten?<span class="pm" aria-hidden="true"></span></summary><p class="a">Nein. Sie bekommen einen Festpreis. Laufende Kosten wie Hosting oder die KI-Rezeptionistin nennen wir vorher schwarz auf weiß.</p></details>
-      <details class="it"><summary>Was passiert nach dem Start?<span class="pm" aria-hidden="true"></span></summary><p class="a">Wir bleiben erreichbar. Je nach Paket sind 3 oder 12 Monate Betreuung dabei. Danach gibt es Wartung zum festen Monatspreis, wenn Sie möchten.</p></details>
+      <details class="it"><summary>Was passiert nach dem Start?<span class="pm" aria-hidden="true"></span></summary><p class="a">Wir bleiben erreichbar. Im Business-Paket sind 3 Monate Betreuung dabei, im Luxus-Paket 12 Monate. Danach übernimmt auf Wunsch unser Sorglos-Paket für 39 € im Monat.</p></details>
       <details class="it"><summary>Kommen Sie auch zu mir in den Betrieb?<span class="pm" aria-hidden="true"></span></summary><p class="a">Ja. In Wien und Umgebung kommen wir gern persönlich vorbei. Im Rest von Österreich sprechen wir per Videocall. Entwurf und Abstimmung laufen danach bequem online, so verlieren Sie keine Zeit.</p></details>
-      <details class="it"><summary>Wie lange dauert es?<span class="pm" aria-hidden="true"></span></summary><p class="a">Basis meist 1 bis 2 Wochen, Business 2 bis 4 Wochen. Exklusiv und Luxus planen wir gemeinsam, meist 4 bis 8 Wochen.</p></details>
+      <details class="it"><summary>Wie lange dauert es?<span class="pm" aria-hidden="true"></span></summary><p class="a">Basis meist 1 bis 2 Wochen, Business 2 bis 4 Wochen. Das Luxus-Paket mit Film planen wir gemeinsam, meist 4 bis 6 Wochen.</p></details>
       <details class="it"><summary>Behalte ich meine Telefonnummer und meinen Kalender?<span class="pm" aria-hidden="true"></span></summary><p class="a">Ja. Die KI-Rezeptionistin arbeitet mit Ihrer bestehenden Nummer und Ihrem Kalender, zum Beispiel Google oder Outlook.</p></details>
       <details class="it"><summary>Ist das DSGVO-konform?<span class="pm" aria-hidden="true"></span></summary><p class="a">Wir bauen datenschutzfreundlich: Schriften liegen auf Ihrem eigenen Server, es laufen keine unnötigen Dienste von Dritten, und Impressum und Datenschutzerklärung sind dabei.</p></details>
     </div>
@@ -661,9 +658,9 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
           <option>Noch unsicher, bitte beraten</option>
           <option>Basis</option>
           <option>Business</option>
-          <option>Exklusiv</option>
           <option>Luxus</option>
           <option>Nur KI-Rezeptionistin</option>
+          <option>Sorglos-Paket</option>
           <option>Webseite und KI-Rezeptionistin</option>
         </select>
       </label>
