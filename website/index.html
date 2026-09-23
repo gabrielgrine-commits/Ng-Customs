@@ -74,9 +74,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .nav.solid nav a:not(.btn){text-shadow:none;color:var(--text-secondary)}
 .nav.solid{background:rgba(244,242,238,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
-.logo{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:700;letter-spacing:.02em}
-.logo .mark{display:grid;place-items:center;width:40px;height:40px;background:#202A4B;color:#F9FAF5;font-size:17px;letter-spacing:.04em}
-.logo .word{font-size:21px;color:var(--ink)}
+.logo{display:flex;align-items:center;gap:14px;font-family:var(--display);font-weight:700;letter-spacing:0;line-height:1}
+.logo .mark{display:grid;place-items:center;width:42px;height:42px;background:#202A4B;color:#F9FAF5;font-size:17px;letter-spacing:.01em}
+.logo .word{font-size:25.5px;color:#161616}
 .nav nav{display:flex;align-items:center;gap:28px;font-size:15px}
 .nav nav a:not(.btn){color:var(--navy);text-shadow:var(--halo);position:relative;transition:color .3s var(--ease-out)}
 .nav nav a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease-out)}
@@ -385,7 +385,7 @@ footer .fine{grid-column:1/-1;display:flex;justify-content:space-between;gap:20p
   form.card{padding:24px}
   footer .wrap{grid-template-columns:1fr}
   footer nav{justify-content:flex-start}
-  .logo .word{font-size:19px}
+  .logo .word{font-size:22px}
 }
 
 /* Reduced motion: final states, nothing moves */
